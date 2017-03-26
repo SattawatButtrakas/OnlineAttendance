@@ -1,0 +1,29 @@
+<ion-view style="" class=" " id="page7" title="Home"> <!-- เปลี่ยนชื่อจาก title="Menu" เป็น title="Home" -->
+    <ion-content class="has-header" padding="false"  ng-init="loadMenu()"  id="background">
+
+		<div class="list card">
+	  		<div class="item item-divider">
+	 			รายวิชา
+	  		</div>
+	  		<div ng-repeat="data in Subject">
+	  			<a class="item" href="#/Attendance" ng-click="info()">
+	    			{{data.name}}
+	  			</a>
+	  		</div>
+	  	</div>
+
+		<div class="list card">
+	  		<div class="item item-divider">
+	 			กิจกรรม
+	  		</div>
+	  		<div ng-repeat="data in Activities">
+	  			<a class="item" href="#/Attendance" ng-click="info()">
+	    			{{data.name}}
+	  			</a>
+	  		</div>
+		</div>
+
+
+
+    </ion-content>
+</ion-view>

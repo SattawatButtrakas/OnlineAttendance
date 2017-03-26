@@ -1,0 +1,18 @@
+<ion-view title="Attendance">
+	<ion-content style="background: url(img/bg1.jpg) center; background-size: cover;">
+	<div class="row header">
+          <div class="col">Name</div>
+          <div class="col">Time</div>
+          <div class="col">Date</div>
+          <div class="col">Places</div>
+
+        </div>
+         <div class="row" ng-repeat="data in ctrl">
+          <div class="col">{{data.Name}}</div>
+          <div class="col">{{data.Time}}</div>
+          <div class="col">{{data.Date}}</div>
+          <div class="col">{{data.Places}}</div>
+
+        </div>
+ 	</ion-content>
+</ion-view>

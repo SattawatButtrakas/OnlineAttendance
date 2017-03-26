@@ -1,0 +1,56 @@
+<ion-view style="" class=" " id="page12" title="Profile">
+  <ion-content class="has-header" padding="false" style="background: url(img/bg1.jpg) center; background-size: cover;">
+    <form name="ProfileForm" class="list " id="Profile-form">
+      <ion-list class=" ">
+        <!-- Profile Cover Page -->
+        <div style= "margin-top: 10px;" class="profile-nav col-md-3">
+          <div class="panel">
+            <div class="user-heading round">
+              <a href="#">
+                <img ng-src="{{&apos;img/fk/&apos;+ user_info.photoURL +&apos;.jpg&apos;}}">
+              </a>
+              <p style="color: #ffffff; margin-top: 20px">{{user_info.displayName}}</p>
+            </div>
+          </div>
+        </div>
+
+        <label class="item item-input ic-selected">
+            <a class="icon icon-right ion-email" style="color:#ffffff; margin: 0 20px 0 20px;"></a>
+            <input style="color: #ffffff;" ng-model="data_editable.email" type="email"  placeholder="Email">
+          </label>
+
+        <label class="item item-input ic-selected">
+            <a class="icon icon-right ion-locked" style="color:#ffffff; margin: 0 20px 0 20px;"></a>
+            <input style="color: #ffffff;" ng-model="data_editable.password" type="password" placeholder="Update Password">
+          </label>
+
+        <label class="item item-input ic-selected">
+            <a class="icon icon-right ion-person" style="color:#ffffff; margin: 0 20px 0 20px;"></a>
+            <input style="color: #ffffff;" ng-model="data_editable.name" type="text"  placeholder="Name">
+          </label>
+
+        <label class="item item-input ic-selected">
+            <a class="icon icon-right ion-university" style="color:#ffffff; margin: 0 20px 0 20px;"></a>
+            <input style="color: #ffffff;" ng-model="data_editable.StudentID" type="text"  placeholder="Student ID">
+          </label>
+
+        <label class="item item-input ic-selected">
+            <a class="icon icon-right ion-android-star" style="color:#ffffff; margin: 0 20px 0 20px;"></a>
+            <input style="color: #ffffff;" ng-model="data_editable.Programe" type="text"  placeholder="Programe">
+          </label>
+
+        <label class="item item-input ic-selected">
+            <a class="icon icon-righ ion-social-buffer" style="color:#ffffff; margin: 0 20px 0 20px;"></a>
+            <input style="color: #ffffff;" ng-model="data_editable.Level" type="text"  placeholder="Level">
+          </label>
+      </ion-list>
+    </form>
+  </ion-content>
+
+  <!-- <ion-footer-bar  class="bar button-bar-footer" style="height: auto;">   -->
+  <div id="footer" class="button-bar">
+    <a style="min-width: 50%;border-radius: 0px;" ng-click="cancel()" class="button button-lite icon-left ion-close">Cancel</a>
+    <a style="min-width: 50%;border-radius: 0px;" ng-click="save(user_extras,data_editable)" class="button button-assertive icon-left ion-checkmark">Save</a>
+  </div>
+  <!-- </ion-footer-bar>  -->
+</ion-view>

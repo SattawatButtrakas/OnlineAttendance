@@ -1,0 +1,34 @@
+<ion-view title="กรอกข้อมูลกิจกรรม">
+    <ion-content  id="background">
+
+    <div class="list list-inset card">
+
+   </div>
+   <!--Activities Header-->
+        <label ng-click="addManipulation()" class="item item-input  item ic-selected" >
+          <a class="icon icon-right ion-ios-people" style="margin-right: 10px; font-size: 200%;" ></a>
+          Activities
+          <i  class="icon icon-right ion-android-add-circle" style="font-size: 200%; ;margin-left: 10px;"></i>
+        </label>
+
+
+      <div ng-repeat="item in Activities"   >
+        <div class="list card" >
+          <div style="min-height: 30px;" class="item item-divider">
+              <a class="icon icon-right ion-ios-people"></a>
+              {{item.Activities_name}}
+              <div style="float: right;">
+                <a ng-click="addManipulation(item)" class="icon icon-right ion-edit" style="font-size: 20px;"></a>
+                <a ng-click="deleteActivities(item.$id)" class="icon icon-right ion-android-delete" style="font-size: 20px;"></a>
+              </div>
+          </div>
+          <div class="item item-body" >
+
+            <span> {{item.Activities}} </span>
+           </div>
+        </div>
+      </div>
+
+
+    </ion-content>
+</ion-view>

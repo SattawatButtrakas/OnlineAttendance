@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title></title>
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="cordova.js"></script>
+  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+  <!--=========================================#1. Custom Header Part====================================-->
+  <!-- Ionic Meterial Header-->
+  <script src="lib/ionic-material/dist/ionic.material.min.js"></script>
+  <script src="lib/ionicuirouter/ionicUIRouter.js"></script>
+  <link href="lib/ionic-material/dist/ionic.material.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=RobotoDraft%3A400%2C500%2C700%2C400italic" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <!--Firebase Header-->
+  <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDgrEyGD6ql83FhJFftZkxqv2_j0XrCud4",
+      authDomain: "auth-3685b.firebaseapp.com",
+      databaseURL: "https://auth-3685b.firebaseio.com",
+      storageBucket: "auth-3685b.appspot.com",
+      messagingSenderId: "119935540294"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <!--======================================================================================================-->
+  <style type="text/css">
+    .platform-ios .manual-ios-statusbar-padding {
+      padding-top: 20px;
+    }
+    .manual-remove-top-padding {
+      padding-top: 0px;
+    }
+    .manual-remove-top-padding .scroll {
+      padding-top: 0px !important;
+    }
+    ion-list.manual-list-fullwidth div.list,
+    .list.card.manual-card-fullwidth {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+    ion-list.manual-list-fullwidth div.list>.item,
+    .list.card.manual-card-fullwidth>.item {
+      border-radius: 0px;
+      border-left: 0px;
+      border-right: 0px;
+    }
+  </style>
+  <script src="js/app.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/routes.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/directives.js"></script>
+  <script src="controllers/manuControl.js"></script>
+  <script src="controllers/SubjectControl.js"></script>
+  <script src="controllers/activitiesControl.js"></script>
+  <script src="controllers/SignupMenuControl.js"></script>
+  <script src="controllers/SignupstudentControl.js"></script>
+  <script src="controllers/SignupAddminControl.js"></script>
+  <script src="controllers/AdminControl.js"></script>
+  <script src="controllers/AdminTeacherControl.js"></script>
+  <script src="controllers/AdminAdminControl.js"></script>
+  <script src="controllers/AddsubjectControl.js"></script>
+  <script src="controllers/AddactivitiesControl.js"></script>
+  <script src="controllers/SubjectsSystemControl.js"></script>
+  <script src="controllers/AttendanceControl.js"></script>
+  <script src="controllers/ATT_HomeControl.js"></script>
+</head>
+<body ng-app="app" animation="slide-left-right-ios7" class="platform-android platform-cordova platform-webview">
+  <div style="">
+    <!--#5. indexCtrl -->
+    <ion-side-menus ng-controller="indexCtrl" data-componentid="side-menu21" style="" enable-menu-with-back-views="false">
+      <ion-side-menu-content>
+        <ion-nav-bar class="bar-assertive">
+          <ion-nav-back-button></ion-nav-back-button>
+          <ion-nav-buttons side="left">
+            <!-- #3.  $root.extras -->
+            <button ng-if="$root.extras" class="button button-icon button-clear ion-navicon" menu-toggle="left">
+                    </button>
+          </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view></ion-nav-view>
+      </ion-side-menu-content>
+
+      <ion-side-menu side="left" id="side-menu21" ng-if="$root.extras">
+        <ion-header-bar class="expanded">
+          <img ng-src="{{&apos;img/fk/&apos;+ user_info.photoURL +&apos;.jpg&apos;}}" class="avatar motion spin fade">
+          <div class="menu-bottom">
+            {{user_info.displayName}}
+          </div>
+        </ion-header-bar>
+        <ion-content class="stable-bg has-expanded-header">
+          <ion-list data-componentid="list1" class=" " id="menu-list1">
+              <ion-item data-componentid="list-item1" style="" menu-close="" ui-sref="menu2" id="menu-list-item1" class="item-icon-left  ">
+                  <i class="icon ion-ios-home"></i>Home</ion-item>
+              <ion-item data-componentid="list-item1" style="" menu-close="" ui-sref="Profile" id="menu-list-item1" class="item-icon-left  ">
+                  <i class="icon ion-person"></i>Profile</ion-item>
+              <ion-item data-componentid="list-item2" style="" menu-close="" ui-sref="SubjectsSystem" id="menu-list-item2" class="item-icon-left">
+                  <i class="icon ion-ios-book"></i>Subject</ion-item>
+              <ion-item data-componentid="list-item3" style="" menu-close="" ui-sref="Addactivities" id="menu-list-item3" class="item-icon-left">
+                  <i class="icon ion-ios-people"></i>Activities</ion-item>
+              <ion-item data-componentid="list-item4" style="" menu-close="" ui-sref="ATT_Home" id="menu-list-item4" class="item-icon-left">
+                  <i class="icon ion-ios-compose"></i>Attendance</ion-item>
+            <ion-item ng-click="logout()" data-componentid="list-item5" style="" id="menu-list-item5" class="item-icon-left  ">
+              <i class="icon ion-android-exit"></i>Logout</ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-side-menu>
+    </ion-side-menus>
+  </div>
+</body>
+
+</html>
