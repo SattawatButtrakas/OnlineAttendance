@@ -22,7 +22,7 @@ angular.module('app.controllers', [])
         $ionicSideMenuDelegate.canDragContent(true); // Sets up the sideMenu dragable
         $rootScope.extras = true;
         sharedUtils.hideLoading();
-        $state.go('menu1', {}, {
+        $state.go('menu2', {}, {
           location: "replace"
         });
 
@@ -45,7 +45,7 @@ angular.module('app.controllers', [])
             });
             $rootScope.extras = true;
             sharedUtils.hideLoading();
-            $state.go('menu1', {}, {
+            $state.go('menu2', {}, {
               location: "replace"
             });
 
@@ -325,10 +325,10 @@ angular.module('app.controllers', [])
       if (user) {
 
         //Accessing an array of objects using firebaseObject, does not give you the $id , so use firebase array to get $id
-        $scope.Activities = $firebaseArray(fireBaseData.refUser().child("เจ้าหน้าที่").child("Activities"));
+        $scope.Activities = $firebaseArray(fireBaseData.refActivities());
 
         // firebaseObject is good for accessing single objects for eg:- telephone. Don't use it for array of objects
-        $scope.user_extras = $firebaseObject(fireBaseData.refUser().child("เจ้าหน้าที่"));
+        $scope.user_extras = $firebaseObject(fireBaseData.refActivities());
 
         $scope.user_info = user; //Saves data to user_info
         //NOTE: $scope.user_info is not writable ie you can't use it inside ng-model of <input>
@@ -387,14 +387,14 @@ angular.module('app.controllers', [])
         if (edit_val != null) {
           //Update  Activities
           if (res != null) { // res ==null  => close
-            fireBaseData.refUser().child("เจ้าหน้าที่").child("Activities").update({ // set
+            fireBaseData.refActivities().child(edit_val.$id).update({ // set
               Activities_name: res.Activities_name,
               Activities_date: res.Activities_date,
             });
           }
         } else {
           //Add new Activities
-          fireBaseData.refUser().child("เจ้าหน้าที่").child("Activities").push({ // set
+          fireBaseData.refActivities().push({ // set
             Activities_name: res.Activities_name,
             Activities_date: res.Activities_date,
           });
@@ -425,7 +425,7 @@ angular.module('app.controllers', [])
 
       confirmPopup.then(function(res) {
         if (res) {
-          fireBaseData.refUser().child("เจ้าหน้าที่").child("Activities").remove();
+          fireBaseData.refActivities().child(res).remove();
         }
       });
     };
@@ -475,10 +475,10 @@ angular.module('app.controllers', [])
       if (user) {
 
         //Accessing an array of objects using firebaseObject, does not give you the $id , so use firebase array to get $id
-        $scope.subject = $firebaseArray(fireBaseData.refUser().child("อาจารย์").child("Subject"));
+        $scope.subject = $firebaseArray(fireBaseData.refSubject());
 
         // firebaseObject is good for accessing single objects for eg:- telephone. Don't use it for array of objects
-        $scope.user_extras = $firebaseObject(fireBaseData.refUser().child("อาจารย์"));
+        $scope.user_extras = $firebaseObject(fireBaseData.refSubject());
 
         $scope.user_info = user; //Saves data to user_info
         //NOTE: $scope.user_info is not writable ie you can't use it inside ng-model of <input>
@@ -511,7 +511,7 @@ angular.module('app.controllers', [])
       // An elaborate, custom popup
       var subjectPopup = $ionicPopup.show({
         template: '<input type="text"   placeholder="ชื่อวิชา"  ng-model="data.Subject_name"> <br/> ' +
-          '<input type="number"   placeholder="รหัสวิชา" ng-model="data.Subject_id"> <br/> ' +
+          '<input type="text"   placeholder="รหัสวิชา" ng-model="data.Subject_id"> <br/> ' +
           '<input type="number" placeholder="กลุ่ม" ng-model="data.group"> <br/> ',
         title: title,
         subTitle: sub_title,
@@ -538,7 +538,7 @@ angular.module('app.controllers', [])
         if (edit_val != null) {
           //Update  subject
           if (res != null) { // res ==null  => close
-            fireBaseData.refUser().child("อาจารย์").child("Subject").update({ // set
+            fireBaseData.refSubject().child(edit_val.$id).update({ // set
               Subject_name: res.Subject_name,
               Subject_id: res.Subject_id,
               group: res.group,
@@ -546,7 +546,7 @@ angular.module('app.controllers', [])
           }
         } else {
           //Add new subject
-          fireBaseData.refUser().child("อาจารย์").child("Subject").push({ // set
+          fireBaseData.refSubject().push({ // set
             Subject_name: res.Subject_name,
             Subject_id: res.Subject_id,
             group: res.group,
@@ -578,7 +578,7 @@ angular.module('app.controllers', [])
 
       confirmPopup.then(function(res) {
         if (res) {
-          fireBaseData.refUser().child("อาจารย์").child("Subject").remove();
+          fireBaseData.refSubject().child(res).remove();
         }
       });
     };
@@ -648,8 +648,8 @@ angular.module('app.controllers', [])
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         //Accessing an array of objects using firebaseObject, does not give you the $id , so use firebase array to get $id
-        $scope.Activities = $firebaseArray(fireBaseData.refUser().child("เจ้าหน้าที่").child("Activities"));
-        $scope.subject = $firebaseArray(fireBaseData.refUser().child("อาจารย์").child("Subject"));
+        $scope.Activities = $firebaseArray(fireBaseData.refActivities());
+        $scope.subject = $firebaseArray(fireBaseData.refSubject());
       }
 
     });
@@ -669,8 +669,8 @@ angular.module('app.controllers', [])
       if (user) {
 
         //Accessing an array of objects using firebaseObject, does not give you the $id , so use firebase array to get $id
-        $scope.Activities = $firebaseArray(fireBaseData.refUser().child("เจ้าหน้าที่").child("Activities"));
-        $scope.subject = $firebaseArray(fireBaseData.refUser().child("อาจารย์").child("Subject"));
+        $scope.Activities = $firebaseArray(fireBaseData.refActivities());
+        $scope.subject = $firebaseArray(fireBaseData.refSubject());
       }
     });
     //Popupการเเจ้งเตือน

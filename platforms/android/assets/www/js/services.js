@@ -3,9 +3,9 @@ angular.module('app.services', [])
 
 .factory('fireBaseData', function($firebase) {
 	var ref = new Firebase("https://auth-3685b.firebaseio.com/"),
-    refCart = new Firebase("https://auth-3685b.firebaseio.com/cart"),
+    refActivities = new Firebase("https://auth-3685b.firebaseio.com/Activities"),
     refUser = new Firebase("https://auth-3685b.firebaseio.com/users"),
-    refCategory = new Firebase("https://auth-3685b.firebaseio.com/category"),
+    refSubject = new Firebase("https://auth-3685b.firebaseio.com/Subject"),
     refOrder = new Firebase("https://auth-3685b.firebaseio.com/orders"),
     refFeatured = new Firebase("https://auth-3685b.firebaseio.com/featured"),
     refMenu = new Firebase("https://auth-3685b.firebaseio.com/menu");
@@ -13,14 +13,14 @@ angular.module('app.services', [])
     ref: function() {
       return ref;
     },
-    refCart: function() {
-      return refCart;
+    refActivities: function() {
+      return refActivities;
     },
     refUser: function() {
       return refUser;
     },
-    refCategory: function() {
-      return refCategory;
+    refSubject: function() {
+      return refSubject;
     },
     refOrder: function() {
       return refOrder;
@@ -79,31 +79,31 @@ angular.module('app.services', [])
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         uid=user.uid;
-        cart.cart_items = $firebaseArray(fireBaseData.refCart().child(uid));
+        cart.cart_items = $firebaseArray(fireBaseData.refActivities().child(uid));
       }
     });
 
 
 
 
-    //Add to Cart
+    //Add to Activities
     cart.add = function(item) {
       //check if item is already added or not
-      fireBaseData.refCart().child(uid).once("value", function(snapshot) {
+      fireBaseData.refActivities().child(uid).once("value", function(snapshot) {
 
         if( snapshot.hasChild(item.$id) == true ){
 
-          //if item is already in the cart
+          //if item is already in the Activities
           var currentQty = snapshot.child(item.$id).val().item_qty;
 
-          fireBaseData.refCart().child(uid).child(item.$id).update({   // update
+          fireBaseData.refActivities().child(uid).child(item.$id).update({   // update
             item_qty : currentQty+1
           });
 
         }else{
 
-          //if item is new in the cart
-          fireBaseData.refCart().child(uid).child(item.$id).set({    // set
+          //if item is new in the Activities
+          fireBaseData.refActivities().child(uid).child(item.$id).set({    // set
             item_name: item.name,
             item_image: item.image,
             item_price: item.price,
@@ -114,18 +114,18 @@ angular.module('app.services', [])
     };
 
     cart.drop=function(item_id){
-      fireBaseData.refCart().child(uid).child(item_id).remove();
+      fireBaseData.refActivities().child(uid).child(item_id).remove();
     };
 
     cart.increment=function(item_id){
 
       //check if item is exist in the cart or not
-      fireBaseData.refCart().child(uid).once("value", function(snapshot) {
+      fireBaseData.refActivities().child(uid).once("value", function(snapshot) {
         if( snapshot.hasChild(item_id) == true ){
 
           var currentQty = snapshot.child(item_id).val().item_qty;
           //check if currentQty+1 is less than available stock
-          fireBaseData.refCart().child(uid).child(item_id).update({
+          fireBaseData.refActivities().child(uid).child(item_id).update({
             item_qty : currentQty+1
           });
 
@@ -138,8 +138,8 @@ angular.module('app.services', [])
 
     cart.decrement=function(item_id){
 
-      //check if item is exist in the cart or not
-      fireBaseData.refCart().child(uid).once("value", function(snapshot) {
+      //check if item is exist in the Activities or not
+      fireBaseData.refActivities().child(uid).once("value", function(snapshot) {
         if( snapshot.hasChild(item_id) == true ){
 
           var currentQty = snapshot.child(item_id).val().item_qty;
@@ -147,7 +147,7 @@ angular.module('app.services', [])
           if( currentQty-1 <= 0){
             cart.drop(item_id);
           }else{
-            fireBaseData.refCart().child(uid).child(item_id).update({
+            fireBaseData.refActivities().child(uid).child(item_id).update({
               item_qty : currentQty-1
             });
           }
