@@ -1,13 +1,13 @@
 <ion-view style="" class=" " id="page7" title="หน้าหลัก">
-  <ion-content id="background">
+  <ion-content class="has-header" padding="false" style="background: url(img/bg1.jpg) center; background-size: cover;">
 
     <div class="list list-inset card">
 
     </div>
     <!--subject Header-->
     <div ng-repeat="item in subject">
-      <div class="list card">
-        <div ng-click="At()" style="min-height: 10px;" class="item item-divider">
+      <div ng-click="At()" class="list card">
+        <div style="min-height: 10px;" class="item item-divider">
           <a class="icon icon-right ion-ios-book"></a>
           {{item.Subject_name}}
         </div>
@@ -15,17 +15,25 @@
 
           <span>{{item.subject}}</span>
           <span>รหัสวิชา: {{item.Subject_id}}</span>
-          <span style="margin-left: 50%;">กลุ่ม: {{item.group}}</span>
+          <span style="margin-left: 30%;">กลุ่ม: {{item.group}}</span>
 
         </div>
       </div>
     </div>
     <!--Activities Header-->
     <div ng-repeat="item in Activities">
-      <div class="list card">
-        <div ng-click="At()" style="min-height: 10px;" class="item item-divider">
+      <div ng-click="At()" class="list card">
+        <div style="min-height: 10px;" class="item item-divider">
           <a class="icon icon-right ion-ios-people"></a>
           {{item.Activities_name}}
+          <div style="float: right;">
+            <a ng-click="addManipulation(item)" class="icon icon-right ion-edit" style="font-size: 20px;"></a>
+            <a ng-click="deleteActivities(item.$id)" class="icon icon-right ion-android-delete" style="font-size: 20px;"></a>
+          </div>
+        </div>
+        <div class="item item-body">
+          <span> {{item.Activities}} </span>
+          <span> วันที่จัดกิจกรรม : {{item.Activities_date}} </span>
         </div>
       </div>
     </div>

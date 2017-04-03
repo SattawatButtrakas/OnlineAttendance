@@ -360,7 +360,8 @@ angular.module('app.controllers', [])
       }
       // An elaborate, custom popup
       var ActivitiesPopup = $ionicPopup.show({
-        template: '<input type="text"   placeholder="ชื่อกิจกรรม"  ng-model="data.Activities_name"> <br/> ',
+        template: '<input type="text"   placeholder="ชื่อกิจกรรม"  ng-model="data.Activities_name"> <br/> ' +
+          '<input type="text"   placeholder="วันที่จัดกิจกรรม"  ng-model="data.Activities_date"> <br/> ',
         title: title,
         subTitle: sub_title,
         scope: $scope,
@@ -388,12 +389,14 @@ angular.module('app.controllers', [])
           if (res != null) { // res ==null  => close
             fireBaseData.refUser().child("เจ้าหน้าที่").child("Activities").update({ // set
               Activities_name: res.Activities_name,
+              Activities_date: res.Activities_date,
             });
           }
         } else {
           //Add new Activities
           fireBaseData.refUser().child("เจ้าหน้าที่").child("Activities").push({ // set
             Activities_name: res.Activities_name,
+            Activities_date: res.Activities_date,
           });
         }
 

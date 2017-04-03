@@ -1,11 +1,11 @@
 <ion-view title="ข้อมูลกิจกรรม">
-  <ion-content id="background">
+  <ion-content class="has-header" padding="false" style="background: url(img/bg1.jpg) center; background-size: cover;">
     <div class="list list-inset card"></div>
     <!--Activities Header-->
     <label ng-click="addManipulation()" class="item item-input  item ic-selected">
-          <a class="icon icon-right ion-ios-people" style="margin-right: 10px; font-size: 200%;" ></a>
-          เพิ่มกิจกรรม
-          <i  class="icon icon-right ion-android-add-circle" style="font-size: 200%; ;margin-left: 50%;"></i>
+          <a class="icon icon-right ion-ios-people" style="margin-right: 10px; font-size: 200%; color:white;"></a>
+          <p style="color:white;">เพิ่มกิจกรรม</p>
+          <i  class="icon icon-right ion-android-add-circle" style="font-size: 200%; color:white; margin-left: 50%;"></i>
         </label>
     <div ng-repeat="item in Activities">
       <div class="list card">
@@ -19,6 +19,7 @@
         </div>
         <div class="item item-body">
           <span> {{item.Activities}} </span>
+          <span> วันที่จัดกิจกรรม : {{item.Activities_date}} </span>
         </div>
       </div>
     </div>
