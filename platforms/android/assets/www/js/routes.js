@@ -40,12 +40,22 @@ angular.module('app.routes', [])
         }
       })
 
+      .state('tabsController.signup0', {
+        url: '/page4',
+        views: {
+          'tab3': {
+            templateUrl: 'templates/signup0.html',
+            controller: 'signup0Ctrl'
+          }
+        }
+      })
+
       .state('tabsController.signupSTU', {
         url: '/page2',
         views: {
           'tab3': {
             templateUrl: 'templates/signupSTU.html',
-            controller: 'signupCtrl'
+            controller: 'signupSTUCtrl'
           }
         }
       })
@@ -54,6 +64,12 @@ angular.module('app.routes', [])
         url: '/page7',
         templateUrl: 'templates/menu2.html',
         controller: 'menu2Ctrl'
+      })
+
+      .state('menu1', {
+        url: '/page4',
+        templateUrl: 'templates/menu1.html',
+        controller: 'menu1Ctrl'
       })
 
       .state('Profile', {
@@ -85,12 +101,6 @@ angular.module('app.routes', [])
         templateUrl: 'templates/Attendance.html',
         controller: 'AttendanceControl'
       })
-
-      .state('ATT_Home',{
-          url:'/ATT_Home',
-          templateUrl:'templates/ATT_Home.html',
-          controller:'ATT_HomeControl'
-        })
 
     $urlRouterProvider.otherwise('/page1/page5')
 

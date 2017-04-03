@@ -1,7 +1,7 @@
-<ion-view title="เพิ่มรายวิชาในระบบ">
+<ion-view title="รายวิชาในระบบ">
 	<ion-content id="background">
-		<div class="list card">
-			<label class="item item-input ic-selected">
+		<div class="list card">	</div>
+			<!--<label class="item item-input ic-selected">
 	        <span class="input-label">ปีการศึกษา</span>
 	        <select name="Faculty" ng-model="user_extras.Faculty" placeholder="Faculty">
 	        	<option></option>
@@ -27,35 +27,33 @@
 	        <select name="Faculty" ng-model="user_extras.Faculty" placeholder="Faculty">
 	        	<option></option>
 	        </select>
-	     </label>
-
-			<!--Add Subject-->
-			<label style="margin-left: 50%;" ng-click="addManipulation()" class="item item-input  item ic-selected">
-            <a class="icon icon-right ion-ios-book" style="font-size: 200%; margin-right: 15px;"></a>
-            เพิ่มรายวิชา
-            <i  class="icon icon-right ion-android-add-circle" style="font-size: 200%;"></i>
-     </label>
-
+	     </label>-->
+		 <!--Add Subject-->
+ 			<label  ng-click="addManipulation()" class="item item-input  item ic-selected" >
+ 				<a class="icon icon-right ion-ios-book" style="margin-left: 10px; font-size: 200%;" ></a>
+ 				<p style="margin-left: 15px;">เพิ่มรายวิชา</p>
+ 				<i  class="icon icon-right ion-android-add-circle" style="font-size: 200%; margin-left: 45%;"></i>
+ 			</label>
 
 			<div ng-repeat="item in subject">
-				<div class="list card">
-					<div style="min-height: 10px;" class="item item-divider">
-						<a class="icon icon-right ion-ios-book"></a>
-						{{item.Subject_name}}
+	      <div class="list card">
+	        <div ng-click="At()" style="min-height: 5px;" class="item item-divider">
+	          <a class="icon icon-right ion-ios-book"></a>
+	          {{item.Subject_name}}
 						<div style="float: right;">
 							<a ng-click="addManipulation(item)" class="icon icon-right ion-edit" style="font-size: 20px;"></a>
 							<a ng-click="deletesubject(item.$id)" class="icon icon-right ion-android-delete" style="font-size: 20px;"></a>
 						</div>
-					</div>
-					<div class="item item-body">
+	          </div>
+	        <div class="item item-body">
 
-						<span> {{item.subject}} </span>
-						<span>Subject_id: {{item.Subject_id}}</span>
-						<span>Group: {{item.group}}</span>
+	          <span>{{item.subject}}</span>
+	          <span>รหัสวิชา: {{item.Subject_id}}</span>
+					  <span style="margin-left: 50%;">กลุ่ม: {{item.group}}</span>
 
-					</div>
-				</div>
-			</div>
+	        </div>
+	      </div>
+	    </div>
 		</div>
 	</ion-content>
 

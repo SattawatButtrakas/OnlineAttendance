@@ -58,20 +58,7 @@
   <script src="js/routes.js"></script>
   <script src="js/services.js"></script>
   <script src="js/directives.js"></script>
-  <script src="controllers/manuControl.js"></script>
-  <script src="controllers/SubjectControl.js"></script>
-  <script src="controllers/activitiesControl.js"></script>
-  <script src="controllers/SignupMenuControl.js"></script>
-  <script src="controllers/SignupstudentControl.js"></script>
-  <script src="controllers/SignupAddminControl.js"></script>
-  <script src="controllers/AdminControl.js"></script>
-  <script src="controllers/AdminTeacherControl.js"></script>
-  <script src="controllers/AdminAdminControl.js"></script>
-  <script src="controllers/AddsubjectControl.js"></script>
-  <script src="controllers/AddactivitiesControl.js"></script>
-  <script src="controllers/SubjectsSystemControl.js"></script>
-  <script src="controllers/AttendanceControl.js"></script>
-  <script src="controllers/ATT_HomeControl.js"></script>
+
 </head>
 <body ng-app="app" animation="slide-left-right-ios7" class="platform-android platform-cordova platform-webview">
   <div style="">
@@ -99,17 +86,17 @@
         <ion-content class="stable-bg has-expanded-header">
           <ion-list data-componentid="list1" class=" " id="menu-list1">
               <ion-item data-componentid="list-item1" style="" menu-close="" ui-sref="menu2" id="menu-list-item1" class="item-icon-left  ">
-                  <i class="icon ion-ios-home"></i>Home</ion-item>
+                  <i class="icon ion-ios-home"></i>หน้าหลัก</ion-item>
               <ion-item data-componentid="list-item1" style="" menu-close="" ui-sref="Profile" id="menu-list-item1" class="item-icon-left  ">
-                  <i class="icon ion-person"></i>Profile</ion-item>
+                  <i class="icon ion-person"></i>ข้อมูลส่วนตัว</ion-item>
               <ion-item data-componentid="list-item2" style="" menu-close="" ui-sref="SubjectsSystem" id="menu-list-item2" class="item-icon-left">
-                  <i class="icon ion-ios-book"></i>Subject</ion-item>
+                  <i class="icon ion-ios-book"></i>รายวิชา</ion-item>
               <ion-item data-componentid="list-item3" style="" menu-close="" ui-sref="Addactivities" id="menu-list-item3" class="item-icon-left">
-                  <i class="icon ion-ios-people"></i>Activities</ion-item>
-              <ion-item data-componentid="list-item4" style="" menu-close="" ui-sref="ATT_Home" id="menu-list-item4" class="item-icon-left">
-                  <i class="icon ion-ios-compose"></i>Attendance</ion-item>
+                  <i class="icon ion-ios-people"></i>กิจกรรม</ion-item>
+              <ion-item data-componentid="list-item4" style="" menu-close="" ui-sref="menu1" id="menu-list-item4" class="item-icon-left">
+                  <i class="icon ion-ios-compose"></i>ตรวจสอบเวลาเรียน</ion-item>
             <ion-item ng-click="logout()" data-componentid="list-item5" style="" id="menu-list-item5" class="item-icon-left  ">
-              <i class="icon ion-android-exit"></i>Logout</ion-item>
+              <i class="icon ion-android-exit"></i>ออกจากระบบ</ion-item>
           </ion-list>
         </ion-content>
       </ion-side-menu>

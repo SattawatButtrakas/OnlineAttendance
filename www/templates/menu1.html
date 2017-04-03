@@ -1,0 +1,38 @@
+<ion-view style="" class=" " id="page4" title="หน้าหลัก">
+  <ion-content id="background">
+
+    <div class="list list-inset card">
+
+    </div>
+    <!--subject Header-->
+    <p style="margin-left: 5%;">รายวิชา</p>
+    <div ng-repeat="item in subject">
+      <div class="list card">
+        <div ng-click="Sj()" style="min-height: 10px;" class="item item-divider">
+          <a class="icon icon-right ion-ios-book"></a>
+          {{item.Subject_name}}
+        </div>
+        <div class="item item-body">
+
+          <span>{{item.subject}}</span>
+          <span>รหัสวิชา: {{item.Subject_id}}</span>
+          <span style="margin-left: 50%;">กลุ่ม: {{item.group}}</span>
+
+        </div>
+      </div>
+    </div>
+    <!--Activities Header-->
+    <p style="margin-top: 50%; margin-left: 5%;">กิจกรรม</p>
+    <div ng-repeat="item in Activities">
+      <div class="list card">
+        <div ng-click="At()" style="min-height: 10px;" class="item item-divider">
+          <a class="icon icon-right ion-ios-people"></a>
+          {{item.Activities_name}}
+        </div>
+      </div>
+    </div><br/>
+
+
+
+  </ion-content>
+</ion-view>

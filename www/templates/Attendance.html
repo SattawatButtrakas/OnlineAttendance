@@ -1,10 +1,10 @@
-<ion-view title="Attendance">
+<ion-view title="ตรวจสอบเวลา">
 	<ion-content style="background: url(img/bg1.jpg) center; background-size: cover;">
 	<div class="row header">
-          <div class="col">Name</div>
-          <div class="col">Time</div>
-          <div class="col">Date</div>
-          <div class="col">Places</div>
+          <div class="col">ชื่อ</div>
+          <div class="col">เวลา</div>
+          <div class="col">วันที่</div>
+          <div class="col">สถานที่</div>
 
         </div>
          <div class="row" ng-repeat="data in ctrl">
@@ -12,7 +12,6 @@
           <div class="col">{{data.Time}}</div>
           <div class="col">{{data.Date}}</div>
           <div class="col">{{data.Places}}</div>
-
         </div>
  	</ion-content>
 </ion-view>

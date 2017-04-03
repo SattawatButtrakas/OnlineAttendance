@@ -22,7 +22,7 @@ angular.module('app.controllers', [])
         $ionicSideMenuDelegate.canDragContent(true); // Sets up the sideMenu dragable
         $rootScope.extras = true;
         sharedUtils.hideLoading();
-        $state.go('menu2', {}, {
+        $state.go('menu1', {}, {
           location: "replace"
         });
 
@@ -45,7 +45,7 @@ angular.module('app.controllers', [])
             });
             $rootScope.extras = true;
             sharedUtils.hideLoading();
-            $state.go('menu2', {}, {
+            $state.go('menu1', {}, {
               location: "replace"
             });
 
@@ -65,10 +65,51 @@ angular.module('app.controllers', [])
   .controller('signupCtrl', function($scope, $rootScope, sharedUtils, $ionicSideMenuDelegate,
     $state, fireBaseData, $ionicHistory) {
     $rootScope.extras = false; // For hiding the side bar and nav icon
+    $scope.signupEmail = function(formName, cred) {
+      if (formName.$valid) { // Check if the form data is valid or not
+        sharedUtils.showLoading();
 
-    $scope.RE = /^[a-zA-Zก-ฮ่้ัีิ์ืเาุู๊ ]{1,25}$/;
-    $scope.NE = /^[0-9 ]{1,8}$/;
-    $scope.Email = /^([0-9])\d+@([\bkmitl()?\b])+\.([a])+c+\.+th/;
+        //Main Firebase Authentication part
+        firebase.auth().createUserWithEmailAndPassword(cred.email, cred.password).then(function(result) {
+
+          //Add name and default dp to the Autherisation table
+          result.updateProfile({
+            displayName: cred.name,
+            photoURL: "default_dp"
+          }).then(function() {}, function(error) {});
+
+          fireBaseData.refUser().child("อาจารย์").push({
+            name: cred.name
+          });
+
+          //Registered OK
+          $ionicHistory.nextViewOptions({
+            historyRoot: true
+          });
+          $ionicSideMenuDelegate.canDragContent(true); // Sets up the sideMenu dragable
+          $rootScope.extras = true;
+          sharedUtils.hideLoading();
+          $state.go('menu2', {}, {
+            location: "replace"
+          });
+
+        }, function(error) {
+          sharedUtils.hideLoading();
+          sharedUtils.showAlert("Please note", "Sign up Error");
+        });
+
+      } else {
+        sharedUtils.showAlert("Please note", "Entered data is not valid");
+      }
+
+    }
+
+  })
+
+  .controller('signup0Ctrl', function($scope, $rootScope, sharedUtils, $ionicSideMenuDelegate,
+    $state, fireBaseData, $ionicHistory) {
+
+    $rootScope.extras = false; // For hiding the side bar and nav icon
     $scope.signupEmail = function(formName, cred) {
 
       if (formName.$valid) { // Check if the form data is valid or not
@@ -84,14 +125,8 @@ angular.module('app.controllers', [])
             photoURL: "default_dp"
           }).then(function() {}, function(error) {});
 
-          //Add Name to the user table
-          fireBaseData.refUser().child(result.uid).set({
-            Name: cred.name
-          });
-
-          //Add StudentID to the user table
-          fireBaseData.refUser().child(result.StudentID).set({
-            StudentID: cred.StudentID
+          fireBaseData.refUser().child("เจ้าหน้าที่").push({
+            name: cred.name
           });
 
           //Registered OK
@@ -102,6 +137,54 @@ angular.module('app.controllers', [])
           $rootScope.extras = true;
           sharedUtils.hideLoading();
           $state.go('menu2', {}, {
+            location: "replace"
+          });
+
+        }, function(error) {
+          sharedUtils.hideLoading();
+          sharedUtils.showAlert("Please note", "Sign up Error");
+        });
+
+      } else {
+        sharedUtils.showAlert("Please note", "Entered data is not valid");
+      }
+
+    }
+
+  })
+
+  .controller('signupSTUCtrl', function($scope, $rootScope, sharedUtils, $ionicSideMenuDelegate,
+    $state, fireBaseData, $ionicHistory) {
+    $rootScope.extras = false; // For hiding the side bar and nav icon
+
+    $scope.signupEmail = function(formName, cred) {
+
+      if (formName.$valid) { // Check if the form data is valid or not
+
+        sharedUtils.showLoading();
+
+        //Main Firebase Authentication part
+        firebase.auth().createUserWithEmailAndPassword(cred.email, cred.password).then(function(result) {
+
+          //Add name and default dp to the Autherisation table
+          result.updateProfile({
+            displayName: cred.name,
+            photoURL: "default_dp"
+          }).then(function() {}, function(error) {});
+
+          fireBaseData.refUser().child("นักศึกษา").push({
+            StudentID: cred.StudentID,
+            name: cred.name
+          });
+
+          //Registered OK
+          $ionicHistory.nextViewOptions({
+            historyRoot: true
+          });
+          $ionicSideMenuDelegate.canDragContent(true); // Sets up the sideMenu dragable
+          $rootScope.extras = true;
+          sharedUtils.hideLoading();
+          $state.go('menu1', {}, {
             location: "replace"
           });
 
@@ -200,6 +283,13 @@ angular.module('app.controllers', [])
         sharedUtils.showAlert("Account", "Password Updated");
       }
 
+      //Edit Name
+      if (editable.name != "" && editable.name != null && editable.name != $scope.user_info.name) {
+        //Update Name
+        firebase.auth().currentUser.updateName(editable.name).then(function(ok) {}, function(error) {});
+        sharedUtils.showAlert("Account", "Name Updated");
+      }
+
       //Edit Email
       if (editable.email != "" && editable.email != null && editable.email != $scope.user_info.email) {
 
@@ -223,8 +313,7 @@ angular.module('app.controllers', [])
   })
 
   .controller('AddactivitiesControl', function($scope, $rootScope, fireBaseData, $firebaseObject,
-    $ionicPopup, $state, $window, $firebaseArray,
-    sharedUtils) {
+    $ionicPopup, $state, $window, $firebaseArray, sharedUtils) {
     //Bugs are most prevailing here
     $rootScope.extras = true;
 
@@ -236,10 +325,10 @@ angular.module('app.controllers', [])
       if (user) {
 
         //Accessing an array of objects using firebaseObject, does not give you the $id , so use firebase array to get $id
-        $scope.Activities = $firebaseArray(fireBaseData.refUser().child(user.uid).child("Activities"));
+        $scope.Activities = $firebaseArray(fireBaseData.refUser().child("เจ้าหน้าที่").child("Activities"));
 
         // firebaseObject is good for accessing single objects for eg:- telephone. Don't use it for array of objects
-        $scope.user_extras = $firebaseObject(fireBaseData.refUser().child(user.uid));
+        $scope.user_extras = $firebaseObject(fireBaseData.refUser().child("เจ้าหน้าที่"));
 
         $scope.user_info = user; //Saves data to user_info
         //NOTE: $scope.user_info is not writable ie you can't use it inside ng-model of <input>
@@ -262,24 +351,24 @@ angular.module('app.controllers', [])
 
       if (edit_val != null) {
         $scope.data = edit_val; // For editing Activities
-        var title = "Edit Activities";
-        var sub_title = "Edit your Activities";
+        var title = "แก้ไขกิจกรรม";
+        var sub_title = "";
       } else {
         $scope.data = {}; // For adding new Activities
-        var title = "Add Activities";
-        var sub_title = "Add your new Activities";
+        var title = "เพิ่มกิจกรรม";
+        var sub_title = "";
       }
       // An elaborate, custom popup
       var ActivitiesPopup = $ionicPopup.show({
-        template: '<input type="text"   placeholder="Activities_name"  ng-model="data.Activities_name"> <br/> ',
+        template: '<input type="text"   placeholder="ชื่อกิจกรรม"  ng-model="data.Activities_name"> <br/> ',
         title: title,
         subTitle: sub_title,
         scope: $scope,
         buttons: [{
-            text: 'Close'
+            text: 'ปิด'
           },
           {
-            text: '<b>Save</b>',
+            text: '<b>บันทึก</b>',
             type: 'button-positive',
             onTap: function(e) {
               if (!$scope.data.Activities_name) {
@@ -297,13 +386,13 @@ angular.module('app.controllers', [])
         if (edit_val != null) {
           //Update  Activities
           if (res != null) { // res ==null  => close
-            fireBaseData.refUser().child($scope.user_info.uid).child("Activities").child(edit_val.$id).update({ // set
+            fireBaseData.refUser().child("เจ้าหน้าที่").child("Activities").update({ // set
               Activities_name: res.Activities_name,
             });
           }
         } else {
           //Add new Activities
-          fireBaseData.refUser().child($scope.user_info.uid).child("Activities").push({ // set
+          fireBaseData.refUser().child("เจ้าหน้าที่").child("Activities").push({ // set
             Activities_name: res.Activities_name,
           });
         }
@@ -315,14 +404,14 @@ angular.module('app.controllers', [])
     // A confirm dialog for deleting Activities
     $scope.deleteActivities = function(del_id) {
       var confirmPopup = $ionicPopup.confirm({
-        title: 'Delete Activities',
-        template: 'Are you sure you want to delete this Activities',
+        title: 'ลบกิจกรรม',
+        template: 'ลบกิจกรรมนี้ใช่หรือไม่',
         buttons: [{
-            text: 'No',
+            text: 'ไม่',
             type: 'button-stable'
           },
           {
-            text: 'Yes',
+            text: 'ใช่',
             type: 'button-assertive',
             onTap: function() {
               return del_id;
@@ -333,19 +422,12 @@ angular.module('app.controllers', [])
 
       confirmPopup.then(function(res) {
         if (res) {
-          fireBaseData.refUser().child($scope.user_info.uid).child("Activities").child(res).remove();
+          fireBaseData.refUser().child("เจ้าหน้าที่").child("Activities").remove();
         }
       });
     };
 
     $scope.save = function(extras, editable) {
-      //1. Edit Telephone doesnt show popup 2. Using extras and editable  // Bugs
-      if (extras.telephone != "" && extras.telephone != null) {
-        //Update  Telephone
-        fireBaseData.refUser().child($scope.user_info.uid).update({ // set
-          telephone: extras.telephone
-        });
-      }
 
       //Edit Password
       if (editable.password != "" && editable.password != null) {
@@ -390,10 +472,10 @@ angular.module('app.controllers', [])
       if (user) {
 
         //Accessing an array of objects using firebaseObject, does not give you the $id , so use firebase array to get $id
-        $scope.subject = $firebaseArray(fireBaseData.refUser().child(user.uid).child("subject"));
+        $scope.subject = $firebaseArray(fireBaseData.refUser().child("อาจารย์").child("Subject"));
 
         // firebaseObject is good for accessing single objects for eg:- telephone. Don't use it for array of objects
-        $scope.user_extras = $firebaseObject(fireBaseData.refUser().child(user.uid));
+        $scope.user_extras = $firebaseObject(fireBaseData.refUser().child("อาจารย์"));
 
         $scope.user_info = user; //Saves data to user_info
         //NOTE: $scope.user_info is not writable ie you can't use it inside ng-model of <input>
@@ -416,26 +498,26 @@ angular.module('app.controllers', [])
 
       if (edit_val != null) {
         $scope.data = edit_val; // For editing subject
-        var title = "Edit Subject";
-        var sub_title = "Edit your Subject";
+        var title = "แก้ไขรายวิชา";
+        var sub_title = "";
       } else {
         $scope.data = {}; // For adding new Subject
-        var title = "Add Subject";
-        var sub_title = "Add your new Subject";
+        var title = "เพิ่มรายวิชา";
+        var sub_title = "";
       }
       // An elaborate, custom popup
       var subjectPopup = $ionicPopup.show({
-        template: '<input type="text"   placeholder="Subject_name"  ng-model="data.Subject_name"> <br/> ' +
-          '<input type="number"   placeholder="Subject_id" ng-model="data.Subject_id"> <br/> ' +
-          '<input type="number" placeholder="Group" ng-model="data.group"> <br/> ',
+        template: '<input type="text"   placeholder="ชื่อวิชา"  ng-model="data.Subject_name"> <br/> ' +
+          '<input type="number"   placeholder="รหัสวิชา" ng-model="data.Subject_id"> <br/> ' +
+          '<input type="number" placeholder="กลุ่ม" ng-model="data.group"> <br/> ',
         title: title,
         subTitle: sub_title,
         scope: $scope,
         buttons: [{
-            text: 'Close'
+            text: 'ปิด'
           },
           {
-            text: '<b>Save</b>',
+            text: '<b>บันทึก</b>',
             type: 'button-positive',
             onTap: function(e) {
               if (!$scope.data.Subject_name || !$scope.data.Subject_id || !$scope.data.group) {
@@ -453,7 +535,7 @@ angular.module('app.controllers', [])
         if (edit_val != null) {
           //Update  subject
           if (res != null) { // res ==null  => close
-            fireBaseData.refUser().child($scope.user_info.uid).child("subject").child(edit_val.$id).update({ // set
+            fireBaseData.refUser().child("อาจารย์").child("Subject").update({ // set
               Subject_name: res.Subject_name,
               Subject_id: res.Subject_id,
               group: res.group,
@@ -461,7 +543,7 @@ angular.module('app.controllers', [])
           }
         } else {
           //Add new subject
-          fireBaseData.refUser().child($scope.user_info.uid).child("subject").push({ // set
+          fireBaseData.refUser().child("อาจารย์").child("Subject").push({ // set
             Subject_name: res.Subject_name,
             Subject_id: res.Subject_id,
             group: res.group,
@@ -475,14 +557,14 @@ angular.module('app.controllers', [])
     // A confirm dialog for deleting subject
     $scope.deletesubject = function(del_id) {
       var confirmPopup = $ionicPopup.confirm({
-        title: 'Delete subject',
-        template: 'Are you sure you want to delete this subject',
+        title: 'ลบรายวิชา',
+        template: 'ต้องการลบรายวิชานี้ใช่หรือไม่',
         buttons: [{
-            text: 'No',
+            text: 'ไม่',
             type: 'button-stable'
           },
           {
-            text: 'Yes',
+            text: 'ใช',
             type: 'button-assertive',
             onTap: function() {
               return del_id;
@@ -493,7 +575,7 @@ angular.module('app.controllers', [])
 
       confirmPopup.then(function(res) {
         if (res) {
-          fireBaseData.refUser().child($scope.user_info.uid).child("subject").child(res).remove();
+          fireBaseData.refUser().child("อาจารย์").child("Subject").remove();
         }
       });
     };
@@ -539,6 +621,11 @@ angular.module('app.controllers', [])
   .controller('SignupMenuControl', function($scope, $state) {
     console.log('SignupMenu START.');
 
+    $scope.btngosignup0 = function() {
+      console.log('signup pressed.');
+      $state.go('tabsController.signup0');
+    }
+
     $scope.btngosignup = function() {
       console.log('signup pressed.');
       $state.go('tabsController.signup');
@@ -550,80 +637,57 @@ angular.module('app.controllers', [])
     }
   })
 
-  .controller('menu2Ctrl', function($scope, $rootScope, $ionicSideMenuDelegate, fireBaseData, $state,
-    $ionicHistory, $firebaseArray, sharedCartService, sharedUtils, $ionicPopup) {
-    console.log('MANU START.');
+  .controller('menu2Ctrl', function($scope, $rootScope, fireBaseData, $firebaseObject,
+    $ionicPopup, $state, $window, $firebaseArray,
+    sharedUtils) {
 
     //Check if user already logged in
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        $scope.user_info = user; //Saves data to user_info
-      } else {
-
-        $ionicSideMenuDelegate.toggleLeft(); //To close the side bar
-        $ionicSideMenuDelegate.canDragContent(false); // To remove the sidemenu white space
-
-        $ionicHistory.nextViewOptions({
-          historyRoot: true
-        });
-        $rootScope.extras = false;
-        sharedUtils.hideLoading();
-        $state.go('tabsController.login', {}, {
-          location: "replace"
-        });
-
+        //Accessing an array of objects using firebaseObject, does not give you the $id , so use firebase array to get $id
+        $scope.Activities = $firebaseArray(fireBaseData.refUser().child("เจ้าหน้าที่").child("Activities"));
+        $scope.subject = $firebaseArray(fireBaseData.refUser().child("อาจารย์").child("Subject"));
       }
+
     });
 
-    //จำลอง data Subjecte
-    $scope.Subject = [{
-        name: 'COMPUTER SECURTY',
-        id: 1
-      },
-      {
-        name: 'ENGINEERING MATHMATIC',
-        id: 2
-      },
-      {
-        name: 'DATA STRUCTURE',
-        id: 3
-      },
-      {
-        name: 'DATABASE SYSTEM',
-        id: 4
-      },
-    ];
-    //Popupการเเจ้งเตือน
-    $scope.Sj = function() {
-      var alert = $ionicPopup.alert({
-        title: 'แจ้งเตือน',
-        template: 'ลงชื่อเข้าเรียนเรียบร้อยแล้ว'
-      })
-    }
-
-    //จำลอง data Activities
-    $scope.Activities = [{
-        name: 'รับน้อง',
-        id: 1
-      },
-      {
-        name: 'ไหว้ครู',
-        id: 2
-      },
-      {
-        name: 'ปัจฉิมนิเทศน์',
-        id: 3
-      },
-      {
-        name: 'อบรม',
-        id: 4
-      },
-    ];
-    //Popupการเเจ้งเตือน
     $scope.At = function() {
+      console.log('signup pressed');
+      $state.go('Attendance');
+    }
+  })
+
+  .controller('menu1Ctrl', function($scope, $rootScope, fireBaseData, $firebaseObject,
+    $ionicPopup, $state, $window, $firebaseArray,
+    sharedUtils) {
+
+    //Check if user already logged in
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+
+        //Accessing an array of objects using firebaseObject, does not give you the $id , so use firebase array to get $id
+        $scope.Activities = $firebaseArray(fireBaseData.refUser().child("เจ้าหน้าที่").child("Activities"));
+        $scope.subject = $firebaseArray(fireBaseData.refUser().child("อาจารย์").child("Subject"));
+      }
+    });
+    //Popupการเเจ้งเตือน
+
+    $scope.At = function() {
+      console.log('signup pressed');
+      $state.go('Attendance');
       var alert = $ionicPopup.alert({
         title: 'แจ้งเตือน',
         template: 'ลงชื่อเข้ากิจกรรมเรียบร้อยแล้ว'
+      })
+    }
+
+    //Popupการเเจ้งเตือน
+    $scope.Sj = function() {
+      console.log('signup pressed');
+      $state.go('Attendance');
+      var alert = $ionicPopup.alert({
+        title: 'แจ้งเตือน',
+        template: 'ลงชื่อเข้าเรียนเรียบร้อยแล้ว'
       })
     }
   })
@@ -631,46 +695,38 @@ angular.module('app.controllers', [])
   .controller('AttendanceControl', function($scope, $state, $ionicPopup) {
     console.log('Attendance START.');
 
-    var ctrl = this;
+      var ctrl = this;
 
-    ctrl.add = add;
-    $scope.ctrl = [{
+      ctrl.add = add;
+      var lista = [{
         Name: "Sattawat",
-        Time: "09:00",
-        Date: 26032016,
+        Time: "20:20",
+        Date: '02-04-60',
         Places: "KMITL"
       },
       {
         Name: "Kittichai",
-        Time: "09:00",
-        Date: 26032016,
+        Time: "20:20",
+        Date: '02-04-60',
         Places: "KMITL"
       },
+      {
+        Name: "Anukul",
+        Time: "20:20",
+        Date: '02-04-60',
+        Places: "KMITL"
+      },
+      {
+        Name: "Nukul",
+        Time: "20:20",
+        Date: '02-04-60',
+        Places: "KMITL"
+      }
     ]
+    $scope.ctrl = lista
 
-    ////////
     function add(index) {
       window.alert("Added: " + index);
     }
 
-  })
-
-  .controller('ATT_HomeControl',function($scope, $state, $ionicPopup) {
-     console.log('ATT_Home START.');
-
-    //จำลอง data Subjecte
-    $scope.Subject = [
-        {name: 'COMPUTER SECURTY', id: 1},
-        {name: 'EDUCATIONAL COMPUTER TECHNOLOGY', id: 2},
-        {name: 'TECHNOLOGY PHOTOGRAPHY', id: 3},
-        {name: 'ENGINEERING MATHMATIC', id: 4},
-        ];
-
-    //จำลอง data Activities
-    $scope.Activities = [
-    {name: 'รับน้อง', id: 1},
-    {name: 'ไหว้ครู', id: 2},
-    {name: 'ปัจฉิมนิเทศน์', id: 3},
-    {name: 'อบรม', id: 4},
-  		];
- });
+  });

@@ -1,24 +1,34 @@
-<ion-view style="" class=" " id="page7" title="Home">
-    <ion-content class="has-header" padding="false"  ng-init="loadMenu()"  id="background">
-		<div class="list card">
-	  		<div class="item item-divider">
-	 			รายวิชา
-	  		</div>
-	  		<div ng-repeat="data in Subject">
-	  			<a class="item" href="#" ng-click="Sj()">
-	    			{{data.name}}
-	  			</a>
-	  		</div>
-	  	</div><br/>
-		<div class="list card">
-	  		<div class="item item-divider">
-	 			กิจกรรม
-	  		</div>
-	  		<div ng-repeat="data in Activities">
-	  			<a class="item" href="#" ng-click="At()">
-	    			{{data.name}}
-	  			</a>
-	  		</div>
-		</div>
-    </ion-content>
+<ion-view style="" class=" " id="page7" title="หน้าหลัก">
+  <ion-content id="background">
+
+    <div class="list list-inset card">
+
+    </div>
+    <!--subject Header-->
+    <div ng-repeat="item in subject">
+      <div class="list card">
+        <div ng-click="At()" style="min-height: 10px;" class="item item-divider">
+          <a class="icon icon-right ion-ios-book"></a>
+          {{item.Subject_name}}
+        </div>
+        <div class="item item-body">
+
+          <span>{{item.subject}}</span>
+          <span>รหัสวิชา: {{item.Subject_id}}</span>
+          <span style="margin-left: 50%;">กลุ่ม: {{item.group}}</span>
+
+        </div>
+      </div>
+    </div>
+    <!--Activities Header-->
+    <div ng-repeat="item in Activities">
+      <div class="list card">
+        <div ng-click="At()" style="min-height: 10px;" class="item item-divider">
+          <a class="icon icon-right ion-ios-people"></a>
+          {{item.Activities_name}}
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
 </ion-view>
