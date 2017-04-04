@@ -1,11 +1,8 @@
 <ion-view style="" class=" " id="page4" title="หน้าหลัก">
   <ion-content class="has-header" padding="true" style="background: url(img/bg1.jpg) center; background-size: cover;">
-
-    <div class="list list-inset card">
-
-    </div>
+    <div class="list list-inset card"></div>
     <!--subject Header-->
-    <p style="margin-left: 5%; color:white; font-size:15px;">รายวิชา</p>
+    <!--<p style="margin-left: 5%; color:white; font-size:15px;">รายวิชา</p>-->
     <div ng-repeat="item in subject">
       <div ng-click="Sj()"  class="list card">
         <div style="min-height: 10px;" class="item item-divider">
@@ -14,15 +11,15 @@
         </div>
         <div class="item item-body">
 
-          <span>{{item.subject}}</span>
+          <span style="font-size:15px">{{item.subject}}</span>
           <span style="font-size:15px;">รหัสวิชา: {{item.Subject_id}}</span>
-          <span style="margin-left: 30%; font-size:15px;">กลุ่ม: {{item.group}}</span>
+          <span style="margin-left: 25%; font-size:15px;">กลุ่ม: {{item.group}}</span>
 
         </div>
       </div>
-    </div>
+    </div></br>
     <!--Activities Header-->
-    <p style="margin-top: 50%; margin-left: 5%; color:white; font-size:15px;">กิจกรรม</p>
+    <!--<p style="margin-top: 50%; margin-left: 5%; color:white; font-size:15px;">กิจกรรม</p>-->
     <div ng-repeat="item in Activities">
       <div ng-click="At()" class="list card">
         <div style="min-height: 10px;" class="item item-divider">
@@ -30,8 +27,8 @@
           {{item.Activities_name}}
         </div>
         <div class="item item-body">
-          <span> {{item.Activities}} </span>
-          <span> วันที่จัดกิจกรรม : {{item.Activities_date}} </span>
+          <span style="font-size:15px">{{item.Activities}} </span>
+          <span style="font-size:15px">วันที่จัดกิจกรรม : {{item.Activities_date}} </span>
         </div>
       </div>
     </div><br/>

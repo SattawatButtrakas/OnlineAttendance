@@ -6,7 +6,7 @@ angular.module('app.services', [])
     refActivities = new Firebase("https://auth-3685b.firebaseio.com/Activities"),
     refUser = new Firebase("https://auth-3685b.firebaseio.com/users"),
     refSubject = new Firebase("https://auth-3685b.firebaseio.com/Subject"),
-    refOrder = new Firebase("https://auth-3685b.firebaseio.com/orders"),
+    refAttendance = new Firebase("https://auth-3685b.firebaseio.com/Attendance"),
     refFeatured = new Firebase("https://auth-3685b.firebaseio.com/featured"),
     refMenu = new Firebase("https://auth-3685b.firebaseio.com/menu");
   return {

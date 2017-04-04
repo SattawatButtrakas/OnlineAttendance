@@ -511,7 +511,7 @@ angular.module('app.controllers', [])
       // An elaborate, custom popup
       var subjectPopup = $ionicPopup.show({
         template: '<input type="text"   placeholder="ชื่อวิชา"  ng-model="data.Subject_name"> <br/> ' +
-          '<input type="number"   placeholder="รหัสวิชา" ng-model="data.Subject_id"> <br/> ' +
+          '<input type="text"   placeholder="รหัสวิชา" ng-model="data.Subject_id"> <br/> ' +
           '<input type="number" placeholder="กลุ่ม" ng-model="data.group"> <br/> ',
         title: title,
         subTitle: sub_title,
@@ -695,41 +695,60 @@ angular.module('app.controllers', [])
     }
   })
 
-  .controller('AttendanceControl', function($scope, $state, $ionicPopup) {
-    console.log('Attendance START.');
+  .controller('AttendanceControl', function($scope, $state, $ionicPopup, fireBaseData) {
+    //console.log(Firebase.ServerValue.TIMESTAMP);
 
-      var ctrl = this;
+      //Add Time to Table
+      /*var tt
+      fireBaseData.refUser().child("นักศึกษา").once("value",function(snapshot){
+      tt = snapshot.child("นักศึกษา").val(); $scope.t = tt   })*/
 
-      ctrl.add = add;
-      var lista = [{
-        Name: "Sattawat",
-        Time: "20:20",
-        Date: '02-04-60',
-        Places: "KMITL"
-      },
-      {
-        Name: "Kittichai",
-        Time: "20:20",
-        Date: '02-04-60',
-        Places: "KMITL"
-      },
-      {
-        Name: "Anukul",
-        Time: "20:20",
-        Date: '02-04-60',
-        Places: "KMITL"
-      },
-      {
-        Name: "Nukul",
-        Time: "20:20",
-        Date: '02-04-60',
-        Places: "KMITL"
-      }
-    ]
-    $scope.ctrl = lista
+      //fireBaseData.refAttendance().push({ // set
+      //Activities_time: firebase.database.ServerValue.TIMESTAMP});
 
     function add(index) {
       window.alert("Added: " + index);
     }
 
-  });
+    $scope.GPS = function() {
+      console.log('signup pressed');
+      $state.go('GPS');
+    }
+
+  })
+
+  .controller('GPSControl', function()  {
+    {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 17
+        });
+        var infoWindow = new google.maps.InfoWindow({map: map});
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+      }
+    });

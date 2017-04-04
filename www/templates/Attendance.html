@@ -1,17 +1,16 @@
 <ion-view title="ตรวจสอบเวลา">
 	<ion-content style="background: url(img/bg1.jpg) center; background-size: cover;">
 	<div class="row header">
-          <div class="col">ชื่อ</div>
-          <div class="col">เวลา</div>
-          <div class="col">วันที่</div>
-          <div class="col">สถานที่</div>
+          <div style="font-size: 17px; text-align:center;" class="col">ชื่อ-นามสกุล</div>
+          <!--div class="col">เวลา</div>-->
+          <div style="font-size: 17px; text-align:center;" class="col">สถานที่</div>
 
         </div>
-         <div class="row" ng-repeat="data in ctrl">
-          <div class="col">{{data.Name}}</div>
-          <div class="col">{{data.Time}}</div>
-          <div class="col">{{data.Date}}</div>
-          <div class="col">{{data.Places}}</div>
-        </div>
+         <div class="row">
+          <div style="font-size: 20px; text-align: center;" class="col">{{user_info.displayName}}</div>
+          <!--<div class="col">{{t}}</div>-->
+          <div class="col"><a ng-click="GPS()" class="icon icon-right ion-location" style="font-size: 30px; margin-left: 40%;"></a></div>
+				</div>
+
  	</ion-content>
 </ion-view>

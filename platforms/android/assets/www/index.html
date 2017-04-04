@@ -58,7 +58,10 @@
   <script src="js/routes.js"></script>
   <script src="js/services.js"></script>
   <script src="js/directives.js"></script>
-
+  <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_VCwMibshY7quw11HkbJbR-t0AuKB7OA&callback=initMap">
+  </script>
 </head>
 <body ng-app="app" animation="slide-left-right-ios7" class="platform-android platform-cordova platform-webview">
   <div style="">
@@ -77,7 +80,7 @@
       </ion-side-menu-content>
 
       <ion-side-menu side="left" id="side-menu21" ng-if="$root.extras">
-        <ion-header-bar class="expanded">
+        <ion-header-bar style="color:black; margin-button:20%"class="expanded">
           <img ng-src="{{&apos;img/fk/&apos;+ user_info.photoURL +&apos;.jpg&apos;}}" class="avatar motion spin fade">
           <div class="menu-bottom">
             {{user_info.displayName}}
@@ -103,5 +106,4 @@
     </ion-side-menus>
   </div>
 </body>
-
 </html>

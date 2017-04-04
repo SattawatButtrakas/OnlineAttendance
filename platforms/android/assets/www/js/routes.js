@@ -102,6 +102,12 @@ angular.module('app.routes', [])
         controller: 'AttendanceControl'
       })
 
+      .state('GPS', {
+        url: '/GPS',
+        templateUrl: 'templates/GPS.html',
+        controller: 'GPSControl'
+      })
+
     $urlRouterProvider.otherwise('/page1/page5')
 
   });
