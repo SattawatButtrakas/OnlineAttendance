@@ -52,12 +52,12 @@ angular.module('app.controllers', [])
           },
           function(error) {
             sharedUtils.hideLoading();
-            sharedUtils.showAlert("Please note", "Authentication Error");
+            sharedUtils.showAlert("กรุณาสมัครใช้งาน", "อีเมลนี้ยังไม่ได้สมัครใช้งาน");
           }
         );
 
       } else {
-        sharedUtils.showAlert("Please note", "Entered data is not valid");
+        sharedUtils.showAlert("กรุณากรอกข้อมูลใหม่", "ข้อมูลที่ป้อนไม่ถูกต้อง");
       }
     };
   })
@@ -95,11 +95,11 @@ angular.module('app.controllers', [])
 
         }, function(error) {
           sharedUtils.hideLoading();
-          sharedUtils.showAlert("Please note", "Sign up Error");
+          sharedUtils.showAlert("กรุณากรอกอีเมลใหม่", "อีเมลนี้มีผู้สมัครใช้งานแล้ว");
         });
 
       } else {
-        sharedUtils.showAlert("Please note", "Entered data is not valid");
+        sharedUtils.showAlert("กรุณากรอกข้อมูลใหม่", "ข้อมูลที่ป้อนไม่ถูกต้อง");
       }
 
     }
@@ -142,11 +142,11 @@ angular.module('app.controllers', [])
 
         }, function(error) {
           sharedUtils.hideLoading();
-          sharedUtils.showAlert("Please note", "Sign up Error");
+          sharedUtils.showAlert("กรุณากรอกอีเมลใหม่", "อีเมลนี้มีผู้สมัครใช้งานแล้ว");
         });
 
       } else {
-        sharedUtils.showAlert("Please note", "Entered data is not valid");
+        sharedUtils.showAlert("กรุณากรอกข้อมูลใหม่", "ข้อมูลที่ป้อนไม่ถูกต้อง");
       }
 
     }
@@ -190,11 +190,11 @@ angular.module('app.controllers', [])
 
         }, function(error) {
           sharedUtils.hideLoading();
-          sharedUtils.showAlert("Please note", "Sign up Error");
+          sharedUtils.showAlert("กรุณากรอกอีเมลใหม่", "อีเมลนี้มีผู้สมัครใช้งานแล้ว");
         });
 
       } else {
-        sharedUtils.showAlert("Please note", "Entered data is not valid");
+        sharedUtils.showAlert("กรุณากรอกข้อมูลใหม่", "ข้อมูลที่ป้อนไม่ถูกต้อง");
       }
 
     }
@@ -480,14 +480,6 @@ angular.module('app.controllers', [])
         // firebaseObject is good for accessing single objects for eg:- telephone. Don't use it for array of objects
         $scope.user_extras = $firebaseObject(fireBaseData.refSubject());
 
-        $scope.user_info = user; //Saves data to user_info
-        //NOTE: $scope.user_info is not writable ie you can't use it inside ng-model of <input>
-
-        //You have to create a local variable for storing emails
-        $scope.data_editable = {};
-        $scope.data_editable.email = $scope.user_info.email; // For editing store it in local variable
-        $scope.data_editable.password = "";
-
         $scope.$apply();
 
         sharedUtils.hideLoading();
@@ -510,8 +502,8 @@ angular.module('app.controllers', [])
       }
       // An elaborate, custom popup
       var subjectPopup = $ionicPopup.show({
-        template: '<input type="text"   placeholder="ชื่อวิชา"  ng-model="data.Subject_name"> <br/> ' +
-          '<input type="text"   placeholder="รหัสวิชา" ng-model="data.Subject_id"> <br/> ' +
+        template: '<input type="text" placeholder="ชื่อวิชา"  ng-model="data.Subject_name"> <br/> ' +
+          '<input type="text" placeholder="รหัสวิชา" ng-model="data.Subject_id"> <br/> ' +
           '<input type="number" placeholder="กลุ่ม" ng-model="data.group"> <br/> ',
         title: title,
         subTitle: sub_title,
@@ -550,7 +542,7 @@ angular.module('app.controllers', [])
             Subject_name: res.Subject_name,
             Subject_id: res.Subject_id,
             group: res.group,
-          });
+            });
         }
 
       });
@@ -581,36 +573,6 @@ angular.module('app.controllers', [])
           fireBaseData.refSubject().child(res).remove();
         }
       });
-    };
-
-    $scope.save = function(extras, editable) {
-      //1. Edit Telephone doesnt show popup 2. Using extras and editable  // Bugs
-      if (extras.telephone != "" && extras.telephone != null) {
-        //Update  Telephone
-        fireBaseData.refUser().child($scope.user_info.uid).update({ // set
-          telephone: extras.telephone
-        });
-      }
-
-      //Edit Password
-      if (editable.password != "" && editable.password != null) {
-        //Update Password in UserAuthentication Table
-        firebase.auth().currentUser.updatePassword(editable.password).then(function(ok) {}, function(error) {});
-        sharedUtils.showAlert("Account", "Password Updated");
-      }
-
-      //Edit Email
-      if (editable.email != "" && editable.email != null && editable.email != $scope.user_info.email) {
-
-        //Update Email/Username in UserAuthentication Table
-        firebase.auth().currentUser.updateEmail(editable.email).then(function(ok) {
-          $window.location.reload(true);
-          //sharedUtils.showAlert("Account","Email Updated");
-        }, function(error) {
-          sharedUtils.showAlert("ERROR", error);
-        });
-      }
-
     };
 
     $scope.cancel = function() {
@@ -673,10 +635,48 @@ angular.module('app.controllers', [])
         $scope.subject = $firebaseArray(fireBaseData.refSubject());
       }
     });
+      // $rootScope.extras=true;
+      //
+      // //Check if user already logged in
+      // firebase.auth().onAuthStateChanged(function(user) {
+      //   if (user) {
+      //
+      //     $scope.cart=sharedCartService.cart_items;  // Loads users cart
+      //
+      //     $scope.get_qty = function() {
+      //       $scope.total_qty=0;
+      //       $scope.total_amount=0;
+      //
+      //       for (var i = 0; i < sharedCartService.cart_items.length; i++) {
+      //         $scope.total_qty += sharedCartService.cart_items[i].item_qty;
+      //         $scope.total_amount += (sharedCartService.cart_items[i].item_qty * sharedCartService.cart_items[i].item_price);
+      //       }
+      //       return $scope.total_qty;
+      //     };
+      //   }
+      //   //We dont need the else part because indexCtrl takes care of it
+      // });
+      //
+      // $scope.removeFromCart=function(c_id){
+      //   sharedCartService.drop(c_id);
+      // };
+      //
+      // $scope.inc=function(c_id){
+      //   sharedCartService.increment(c_id);
+      // };
+      //
+      // $scope.dec=function(c_id){
+      //   sharedCartService.decrement(c_id);
+      // };
+      //
+      // $scope.checkout=function(){
+      //   $state.go('checkout', {}, {location: "replace"});
+      // };
+
     //Popupการเเจ้งเตือน
 
     $scope.At = function() {
-      console.log('signup pressed');
+      console.log('Pressed');
       $state.go('Attendance');
       var alert = $ionicPopup.alert({
         title: 'แจ้งเตือน',
@@ -686,7 +686,7 @@ angular.module('app.controllers', [])
 
     //Popupการเเจ้งเตือน
     $scope.Sj = function() {
-      console.log('signup pressed');
+      console.log('Pressed');
       $state.go('Attendance');
       var alert = $ionicPopup.alert({
         title: 'แจ้งเตือน',
@@ -695,60 +695,60 @@ angular.module('app.controllers', [])
     }
   })
 
-  .controller('AttendanceControl', function($scope, $state, $ionicPopup, fireBaseData) {
-    //console.log(Firebase.ServerValue.TIMESTAMP);
+  .controller('AttendanceControl', function($scope, $rootScope, fireBaseData, $firebaseObject,
+    $ionicPopup, $state, $window, $firebaseArray, sharedUtils) {
 
-      //Add Time to Table
-      /*var tt
-      fireBaseData.refUser().child("นักศึกษา").once("value",function(snapshot){
-      tt = snapshot.child("นักศึกษา").val(); $scope.t = tt   })*/
-
-      //fireBaseData.refAttendance().push({ // set
-      //Activities_time: firebase.database.ServerValue.TIMESTAMP});
-
-    function add(index) {
-      window.alert("Added: " + index);
-    }
+    var sessionsRef = fireBaseData.refTime("sessions");
+    sessionsRef.push(
+      {
+      startedAt: firebase.database.ServerValue.TIMESTAMP
+      });
 
     $scope.GPS = function() {
       console.log('signup pressed');
       $state.go('GPS');
     }
-
   })
 
-  .controller('GPSControl', function()  {
+  .controller('GPSControl', function() {
     {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 17
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+          lat: -34.397,
+          lng: 150.644
+        },
+        zoom: 30  
+      });
+      var infoWindow = new google.maps.InfoWindow({
+        map: map
+      });
+
+      // Try HTML5 geolocation.
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position, $scope) {
+
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+
+          infoWindow.setPosition(pos);
+          infoWindow.setContent(pos.lat + " , " + pos.lng);
+          map.setCenter(pos);
+
+        }, function() {
+          handleLocationError(true, infoWindow, map.getCenter());
         });
-        var infoWindow = new google.maps.InfoWindow({map: map});
-
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
+      } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
       }
+    }
 
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-      }
-    });
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      infoWindow.setPosition(pos);
+      infoWindow.setContent(browserHasGeolocation ?
+        'Error: The Geolocation service failed.' :
+        'Error: Your browser doesn\'t support geolocation.');
+    }
+  })

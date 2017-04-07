@@ -319,14 +319,44 @@ label, span, .input-label {
   width: 100%;
 }
 
-
 /*css ตาราง*/
-
-.col {
+.col1 {
   border: solid 1px grey;
   border-bottom-style: none;
   border-right-style: none;
   background-color: white;
+  width: 80%;
+  height: 40px;
+  padding-top: 10px;
+}
+
+.col2 {
+  border: solid 1px grey;
+  border-bottom-style: none;
+  border-right-style: none;
+  background-color: white;
+  width: 20%;
+  height: 40px;
+  padding-top: 10px;
+}
+.col3 {
+  border: solid 1px grey;
+  border-bottom-style: none;
+  border-right-style: none;
+  background-color: white;
+  width: 20%;
+  height: 40px;
+  padding-top: 10px;
+}
+
+.col4 {
+  border: solid 1px grey;
+  border-bottom-style: none;
+  border-right-style: none;
+  background-color: white;
+  width: 20%;
+  height: 40px;
+  padding-top: 5px;
 }
 
 .col:last-child {
@@ -340,7 +370,6 @@ label, span, .input-label {
 .header .col {
   background-color: lightgrey;
 }
-
 
 /*css หน้า Home */
 
