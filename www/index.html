@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
@@ -18,8 +19,8 @@
   <!--Firebase Header-->
   <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
   <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGQ_3nTPkqFL6PHIEo0BRXtWmmMEEu9mM&libraries=places"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
   <script>
     // Initialize Firebase
     var config = {
@@ -36,17 +37,21 @@
     .platform-ios .manual-ios-statusbar-padding {
       padding-top: 20px;
     }
+
     .manual-remove-top-padding {
       padding-top: 0px;
     }
+
     .manual-remove-top-padding .scroll {
       padding-top: 0px !important;
     }
+
     ion-list.manual-list-fullwidth div.list,
     .list.card.manual-card-fullwidth {
       margin-left: -10px;
       margin-right: -10px;
     }
+
     ion-list.manual-list-fullwidth div.list>.item,
     .list.card.manual-card-fullwidth>.item {
       border-radius: 0px;
@@ -61,10 +66,10 @@
   <script src="js/services.js"></script>
   <script src="js/firebasemap.js"></script>
   <script src="lib/ngCordova/dist/ng-cordova.js"></script>
-  <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_VCwMibshY7quw11HkbJbR-t0AuKB7OA&libraries=visualization&callback=initMap">
-    </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_VCwMibshY7quw11HkbJbR-t0AuKB7OA&libraries=visualization&callback=initMap">
+  </script>
 </head>
+
 <body ng-app="app" animation="slide-left-right-ios7">
   <div style="">
     <!--#5. indexCtrl -->
@@ -82,30 +87,52 @@
       </ion-side-menu-content>
 
       <ion-side-menu side="left" id="side-menu21" ng-if="$root.extras">
-        <ion-header-bar style="color:black; margin-button:20%"class="expanded">
+        <ion-header-bar style="color:black; margin-button:20%" class="expanded">
           <img ng-src="{{&apos;img/fk/&apos;+ user_info.photoURL +&apos;.jpg&apos;}}" class="avatar motion spin fade">
           <div class="menu-bottom">
             {{user_info.displayName}}
           </div>
         </ion-header-bar>
+
         <ion-content class="stable-bg has-expanded-header">
+
+          <!-- <div ng-if=""> -->
           <ion-list data-componentid="list1" class=" " id="menu-list1">
-              <ion-item data-componentid="list-item1" style="" menu-close="" ui-sref="menu1" id="menu-list-item1" class="item-icon-left  ">
-                  <i class="icon ion-ios-home"></i>หน้าหลัก</ion-item>
-              <ion-item data-componentid="list-item1" style="" menu-close="" ui-sref="Profile" id="menu-list-item1" class="item-icon-left  ">
-                  <i class="icon ion-person"></i>ข้อมูลส่วนตัว</ion-item>
-              <ion-item data-componentid="list-item2" style="" menu-close="" ui-sref="SubjectsSystem" id="menu-list-item2" class="item-icon-left">
-                  <i class="icon ion-ios-book"></i>รายวิชา</ion-item>
-              <ion-item data-componentid="list-item3" style="" menu-close="" ui-sref="Addactivities" id="menu-list-item3" class="item-icon-left">
-                  <i class="icon ion-ios-people"></i>กิจกรรม</ion-item>
-              <ion-item data-componentid="list-item4" style="" menu-close="" ui-sref="menu2" id="menu-list-item4" class="item-icon-left">
-                  <i class="icon ion-ios-compose"></i>ตรวจสอบเวลาเรียน</ion-item>
+            <ion-item data-componentid="list-item1" style="" menu-close="" ui-sref="menu1" id="menu-list-item1" class="item-icon-left  ">
+              <i class="icon ion-ios-home"></i>หน้าหลัก</ion-item>
+            <ion-item data-componentid="list-item1" style="" menu-close="" ui-sref="Profile" id="menu-list-item1" class="item-icon-left  ">
+              <i class="icon ion-person"></i>ข้อมูลส่วนตัว</ion-item>
+            <ion-item data-componentid="list-item2" style="" menu-close="" ui-sref="SubjectsSystem" id="menu-list-item2" class="item-icon-left">
+              <i class="icon ion-ios-book"></i>รายวิชา</ion-item>
+            <ion-item data-componentid="list-item3" style="" menu-close="" ui-sref="Addactivities" id="menu-list-item3" class="item-icon-left">
+              <i class="icon ion-ios-people"></i>กิจกรรม</ion-item>
+            <ion-item data-componentid="list-item4" style="" menu-close="" ui-sref="menu2" id="menu-list-item4" class="item-icon-left">
+              <i class="icon ion-ios-compose"></i>ตรวจสอบเวลา</ion-item>
             <ion-item ng-click="logout()" data-componentid="list-item5" style="" id="menu-list-item5" class="item-icon-left  ">
               <i class="icon ion-android-exit"></i>ออกจากระบบ</ion-item>
           </ion-list>
+          </div>
+
+          <div ng-if="">
+          <ion-list data-componentid="list1" class=" " id="menu-list1">
+            <ion-item data-componentid="list-item1" style="" menu-close="" ui-sref="menu1" id="menu-list-item1" class="item-icon-left  ">
+              <i class="icon ion-ios-home"></i>หน้าหลัก</ion-item>
+            <ion-item data-componentid="list-item1" style="" menu-close="" ui-sref="Profile" id="menu-list-item1" class="item-icon-left  ">
+              <i class="icon ion-person"></i>ข้อมูลส่วนตัว</ion-item>
+            <ion-item data-componentid="list-item3" style="" menu-close="" ui-sref="Addactivities" id="menu-list-item3" class="item-icon-left">
+              <i class="icon ion-ios-people"></i>กิจกรรม</ion-item>
+            <ion-item data-componentid="list-item4" style="" menu-close="" ui-sref="menu2" id="menu-list-item4" class="item-icon-left">
+              <i class="icon ion-ios-compose"></i>ตรวจสอบเวลา</ion-item>
+            <ion-item ng-click="logout()" data-componentid="list-item5" style="" id="menu-list-item5" class="item-icon-left  ">
+              <i class="icon ion-android-exit"></i>ออกจากระบบ</ion-item>
+          </ion-list>
+          </div>
+
         </ion-content>
+
       </ion-side-menu>
     </ion-side-menus>
   </div>
 </body>
+
 </html>

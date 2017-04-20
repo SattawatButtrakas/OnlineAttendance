@@ -1,60 +1,57 @@
-<ion-view title="รายวิชาในระบบ">
+<ion-view title="รายวิชา">
 	<ion-content class="has-header" padding="false" style="background: url(img/bg1.jpg) center; background-size: cover;">
-		<div class="list card">	</div>
-			<!--<label class="item item-input ic-selected">
-	        <span class="input-label">ปีการศึกษา</span>
-	        <select name="Faculty" ng-model="user_extras.Faculty" placeholder="Faculty">
-	        	<option></option>
-	        </select>
-	     </label>
 
-			<label class="item item-input ic-selected">
-	        <span class="input-label">ภาคการศึกษา</span>
-	        <select name="Faculty" ng-model="user_extras.Faculty" placeholder="Faculty">
-	        	<option></option>
-	        </select>
-	     </label>
-
-			<label class="item item-input ic-selected">
-	        <span class="input-label">สาขาวิชา</span>
-	        <select name="Faculty" ng-model="user_extras.Faculty" placeholder="Faculty">
-	        	<option></option>
-	        </select>
-	     </label>
-
-			<label class="item item-input ic-selected">
-	        <span class="input-label">ชั้นปี</span>
-	        <select name="Faculty" ng-model="user_extras.Faculty" placeholder="Faculty">
-	        	<option></option>
-	        </select>
-	     </label>-->
-		 <!--Add Subject-->
- 			<label  ng-click="addManipulation()" class="item item-input  item ic-selected" >
- 				<a class="icon icon-right ion-ios-book" style="margin-left: 10px; font-size: 200%; color:white;" ></a>
- 				<p style="margin-left: 15px; color:white; font-size:15px;">เพิ่มรายวิชา</p>
- 				<i  class="icon icon-right ion-android-add-circle" style="font-size: 200%; margin-left: 55%; color:white;"></i>
- 			</label>
-
-			<div ng-repeat="item in subject">
-	      <div class="list card">
-	        <div ng-click="At()" style="min-height: 5px;" class="item item-divider">
-	          <a class="icon icon-right ion-ios-book"></a>
-	          {{item.Subject_name}}
-						<div style="float: right;">
-							<a ng-click="addManipulation(item)" class="icon icon-right ion-edit" style="font-size: 20px;"></a>
-							<a ng-click="deletesubject(item.$id)" class="icon icon-right ion-android-delete" style="font-size: 20px;"></a>
-						</div>
-	          </div>
-	        <div class="item item-body">
-
-	          <span style="font-size:15px">{{item.subject}}</span>
-	          <span style="font-size:15px">รหัสวิชา : {{item.Subject_id}}</span>
-					  <span style="margin-left: 40%">กลุ่ม : {{item.group}}</span>
-
-	        </div>
-	      </div>
-	    </div>
+		<!--Add Subject-->
+		<div ng-repeat="item in subject">
+			<div class="list card">
+				<div ng-click="At()" style="background-color:#87CEEB" class="item item-divider">
+					<a class="icon icon-right ion-ios-book" style="color:black; margin-right: 10px"></a>{{item.Subject_name}}
+					<div style="float: right;">
+						<a ng-click="addManipulation(item)" class="icon icon-right ion-edit" style="color:black; font-size: 20px;"></a>
+						<a ng-click="deletesubject(item.$id)" class="icon icon-right ion-android-delete" style="color:black; font-size: 20px;"></a>
+					</div>
+				</div>
+				<div class="item item-body">
+					<span style="font-size:15px">{{item.subject}}</span>
+					<span style="font-size:15px">รหัสวิชา : {{item.Subject_id}}</span>
+					<span style="margin-left: 30%">กลุ่ม : {{item.group}}</span>
+				</div>
+			</div>
 		</div>
-	</ion-content>
 
-</ion-view>
+		</ion-content>
+			<div>
+				<i ng-click="addManipulation()" class="ion-android-add-circle" style="font-size: 400%; color:#FF0000; position: absolute; bottom: 10%; right: 10%;"></i>
+			</div>
+		</ion-view>
+
+
+
+
+<!--<label class="item item-input ic-selected">
+			<span class="input-label">ปีการศึกษา</span>
+			<select name="Faculty" ng-model="user_extras.Faculty" placeholder="Faculty">
+				<option></option>
+			</select>
+	 </label>
+
+	<label class="item item-input ic-selected">
+			<span class="input-label">ภาคการศึกษา</span>
+			<select name="Faculty" ng-model="user_extras.Faculty" placeholder="Faculty">
+				<option></option>
+			</select>
+	 </label>
+
+	<label class="item item-input ic-selected">
+			<span class="input-label">สาขาวิชา</span>
+			<select name="Faculty" ng-model="user_extras.Faculty" placeholder="Faculty">
+				<option></option>
+			</select>
+	 </label>
+
+	<label class="item item-input ic-selected">
+			<span class="input-label">ชั้นปี</span>
+			<select name="Faculty" ng-model="user_extras.Faculty" placeholder="Faculty">
+				<option></option>
+			</select>
+	 </label>-->

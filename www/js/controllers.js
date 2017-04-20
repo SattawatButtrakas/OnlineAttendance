@@ -22,13 +22,12 @@ angular.module('app.controllers', [])
         $ionicSideMenuDelegate.canDragContent(true); // Sets up the sideMenu dragable
         $rootScope.extras = true;
         sharedUtils.hideLoading();
-        $state.go('menu2', {}, {
+        $state.go('menu1', {}, {
           location: "replace"
         });
 
       }
     });
-
 
     $scope.loginEmail = function(formName, cred) {
 
@@ -45,7 +44,7 @@ angular.module('app.controllers', [])
             });
             $rootScope.extras = true;
             sharedUtils.hideLoading();
-            $state.go('menu2', {}, {
+            $state.go('menu1', {}, {
               location: "replace"
             });
 
@@ -75,7 +74,7 @@ angular.module('app.controllers', [])
           //Add name and default dp to the Autherisation table
           result.updateProfile({
             displayName: cred.name,
-            photoURL: "default_dp"
+            photoURL: "Teach"
           }).then(function() {}, function(error) {});
 
           fireBaseData.refUser().child("อาจารย์").push({
@@ -89,7 +88,7 @@ angular.module('app.controllers', [])
           $ionicSideMenuDelegate.canDragContent(true); // Sets up the sideMenu dragable
           $rootScope.extras = true;
           sharedUtils.hideLoading();
-          $state.go('menu2', {}, {
+          $state.go('menu1', {}, {
             location: "replace"
           });
 
@@ -122,7 +121,7 @@ angular.module('app.controllers', [])
           //Add name and default dp to the Autherisation table
           result.updateProfile({
             displayName: cred.name,
-            photoURL: "default_dp"
+            photoURL: "Staff"
           }).then(function() {}, function(error) {});
 
           fireBaseData.refUser().child("เจ้าหน้าที่").push({
@@ -136,7 +135,7 @@ angular.module('app.controllers', [])
           $ionicSideMenuDelegate.canDragContent(true); // Sets up the sideMenu dragable
           $rootScope.extras = true;
           sharedUtils.hideLoading();
-          $state.go('menu2', {}, {
+          $state.go('menu1', {}, {
             location: "replace"
           });
 
@@ -169,7 +168,7 @@ angular.module('app.controllers', [])
           //Add name and default dp to the Autherisation table
           result.updateProfile({
             displayName: cred.name,
-            photoURL: "default_dp"
+            photoURL: "Stu"
           }).then(function() {}, function(error) {});
 
           fireBaseData.refUser().child("นักศึกษา").push({
@@ -237,6 +236,8 @@ angular.module('app.controllers', [])
       });
 
     }
+
+    //
 
   })
 
@@ -384,7 +385,10 @@ angular.module('app.controllers', [])
 
       ActivitiesPopup.then(function(res) {
 
+
         if (edit_val != null) {
+
+
           //Update  Activities
           if (res != null) { // res ==null  => close
             fireBaseData.refActivities().child(edit_val.$id).update({ // set
@@ -393,7 +397,14 @@ angular.module('app.controllers', [])
             });
           }
         } else {
+
+
           //Add new Activities
+          fireBaseData.refUser().push({ // set
+            Activities_name: res.Activities_name,
+            Activities_date: res.Activities_date,
+          });
+
           fireBaseData.refActivities().push({ // set
             Activities_name: res.Activities_name,
             Activities_date: res.Activities_date,
@@ -425,7 +436,13 @@ angular.module('app.controllers', [])
 
       confirmPopup.then(function(res) {
         if (res) {
+
+
+
           fireBaseData.refActivities().child(res).remove();
+
+
+
         }
       });
     };
@@ -538,15 +555,13 @@ angular.module('app.controllers', [])
           }
         } else {
           //Add new subject
-          fireBaseData.refSubject().push({ // set
+            fireBaseData.refSubject().push({ // set
             Subject_name: res.Subject_name,
             Subject_id: res.Subject_id,
             group: res.group,
-            });
+          });
         }
-
       });
-
     };
 
     // A confirm dialog for deleting subject
@@ -606,15 +621,15 @@ angular.module('app.controllers', [])
     $ionicPopup, $state, $window, $firebaseArray,
     sharedUtils) {
 
-    //Check if user already logged in
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        //Accessing an array of objects using firebaseObject, does not give you the $id , so use firebase array to get $id
-        $scope.Activities = $firebaseArray(fireBaseData.refActivities());
-        $scope.subject = $firebaseArray(fireBaseData.refSubject());
-      }
-
-    });
+      // //Check if user already logged in
+      // firebase.auth().onAuthStateChanged(function(user) {
+      //   if (user) {
+      //     $scope.subject = $firebaseArray(fireBaseData.refSubject());
+      //   }
+      //   else {
+      //     $scope.Activities = $firebaseArray(fireBaseData.refActivities());
+      //   }
+      // });
 
     $scope.At = function() {
       console.log('signup pressed');
@@ -626,56 +641,22 @@ angular.module('app.controllers', [])
     $ionicPopup, $state, $window, $firebaseArray,
     sharedUtils) {
 
-    //Check if user already logged in
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-
-        //Accessing an array of objects using firebaseObject, does not give you the $id , so use firebase array to get $id
-        $scope.Activities = $firebaseArray(fireBaseData.refActivities());
-        $scope.subject = $firebaseArray(fireBaseData.refSubject());
-      }
-    });
-      // $rootScope.extras=true;
-      //
-      // //Check if user already logged in
-      // firebase.auth().onAuthStateChanged(function(user) {
-      //   if (user) {
-      //
-      //     $scope.cart=sharedCartService.cart_items;  // Loads users cart
-      //
-      //     $scope.get_qty = function() {
-      //       $scope.total_qty=0;
-      //       $scope.total_amount=0;
-      //
-      //       for (var i = 0; i < sharedCartService.cart_items.length; i++) {
-      //         $scope.total_qty += sharedCartService.cart_items[i].item_qty;
-      //         $scope.total_amount += (sharedCartService.cart_items[i].item_qty * sharedCartService.cart_items[i].item_price);
-      //       }
-      //       return $scope.total_qty;
-      //     };
-      //   }
-      //   //We dont need the else part because indexCtrl takes care of it
-      // });
-      //
-      // $scope.removeFromCart=function(c_id){
-      //   sharedCartService.drop(c_id);
-      // };
-      //
-      // $scope.inc=function(c_id){
-      //   sharedCartService.increment(c_id);
-      // };
-      //
-      // $scope.dec=function(c_id){
-      //   sharedCartService.decrement(c_id);
-      // };
-      //
-      // $scope.checkout=function(){
-      //   $state.go('checkout', {}, {location: "replace"});
-      // };
+    // //Check if user already logged in
+    // firebase.auth().onAuthStateChanged(function(user) {
+    //   if (user) {
+    //     $scope.subject = $firebaseArray(fireBaseData.refSubject());
+    //   }
+    //   else {
+    //     $scope.Activities = $firebaseArray(fireBaseData.refActivities());
+    //   }
+    // });
 
     //Popupการเเจ้งเตือน
-
     $scope.At = function() {
+      var sessionsRef = fireBaseData.refTime().child("Activities");
+      sessionsRef.push({
+        startedAt: firebase.database.ServerValue.TIMESTAMP
+      });
       console.log('Pressed');
       $state.go('Attendance');
       var alert = $ionicPopup.alert({
@@ -686,6 +667,10 @@ angular.module('app.controllers', [])
 
     //Popupการเเจ้งเตือน
     $scope.Sj = function() {
+      var sessionsRef = fireBaseData.refTime().child("subject");
+      sessionsRef.push({
+        startedAt: firebase.database.ServerValue.TIMESTAMP
+      });
       console.log('Pressed');
       $state.go('Attendance');
       var alert = $ionicPopup.alert({
@@ -697,12 +682,6 @@ angular.module('app.controllers', [])
 
   .controller('AttendanceControl', function($scope, $rootScope, fireBaseData, $firebaseObject,
     $ionicPopup, $state, $window, $firebaseArray, sharedUtils) {
-
-    var sessionsRef = fireBaseData.refTime("sessions");
-    sessionsRef.push(
-      {
-      startedAt: firebase.database.ServerValue.TIMESTAMP
-      });
 
     $scope.GPS = function() {
       console.log('signup pressed');
@@ -717,7 +696,7 @@ angular.module('app.controllers', [])
           lat: -34.397,
           lng: 150.644
         },
-        zoom: 30  
+        zoom: 30
       });
       var infoWindow = new google.maps.InfoWindow({
         map: map

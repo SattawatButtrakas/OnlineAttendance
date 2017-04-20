@@ -1,17 +1,21 @@
-<ion-view style="" class=" " id="page8" title="หน้าหลัก">
-  <ion-content class="has-header" padding="true" style="background: url(img/bg1.jpg) center; background-size: cover;">
+<ion-view style="" class=" " id="page9" title="หน้าหลัก">
+  <ion-content class="has-header" padding="false" style="background: url(img/bg1.jpg) center; background-size: cover;">
+
+    <div class="list list-inset card">
+
+    </div>
     <!--subject Header-->
     <div ng-repeat="item in subject">
-      <div ng-click="Sj()" class="list card">
-        <div style="background-color:#87CEEB" style="min-height: 10px;" class="item item-divider">
-          <a style="color:black; margin-right:10px;" class="icon icon-right ion-ios-book"></a>
+      <div ng-click="At()" class="list card">
+        <div style="min-height: 10px;" class="item item-divider">
+          <a class="icon icon-right ion-ios-book"></a>
           {{item.Subject_name}}
         </div>
         <div class="item item-body">
 
           <span style="font-size:15px">{{item.subject}}</span>
           <span style="font-size:15px">รหัสวิชา: {{item.Subject_id}}</span>
-          <span style="margin-left: 25%; font-size:15px">กลุ่ม: {{item.group}}</span>
+          <span style="margin-left: 30%; font-size:15px">กลุ่ม: {{item.group}}</span>
 
         </div>
       </div>
@@ -19,8 +23,8 @@
     <!--Activities Header-->
     <div ng-repeat="item in Activities">
       <div ng-click="At()" class="list card">
-        <div style="background-color:	#FFA07A; min-height: 10px;" class="item item-divider">
-          <a style="color:black; margin-right:10px;" class="icon icon-right ion-ios-people"></a>
+        <div style="min-height: 10px;" class="item item-divider">
+          <a class="icon icon-right ion-ios-people"></a>
           {{item.Activities_name}}
           <div style="float: right;">
           </div>

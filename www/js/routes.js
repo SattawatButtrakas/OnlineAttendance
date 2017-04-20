@@ -60,6 +60,12 @@ angular.module('app.routes', [])
         }
       })
 
+      .state('menu3', {
+        url: '/page9',
+        templateUrl: 'templates/menu3.html',
+        controller: 'menu3Ctrl'
+      })
+
       .state('menu2', {
         url: '/page7',
         templateUrl: 'templates/menu2.html',
@@ -67,7 +73,7 @@ angular.module('app.routes', [])
       })
 
       .state('menu1', {
-        url: '/page4',
+        url: '/page8',
         templateUrl: 'templates/menu1.html',
         controller: 'menu1Ctrl'
       })
