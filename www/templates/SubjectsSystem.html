@@ -4,7 +4,7 @@
 		<!--Add Subject-->
 		<div ng-repeat="item in subject">
 			<div class="list card">
-				<div ng-click="At()" style="background-color:#87CEEB" class="item item-divider">
+				<div ng-click="addTohome(subject[$index])" style="background-color:#87CEEB" class="item item-divider">
 					<a class="icon icon-right ion-ios-book" style="color:black; margin-right: 10px"></a>{{item.Subject_name}}
 					<div style="float: right;">
 						<a ng-click="addManipulation(item)" class="icon icon-right ion-edit" style="color:black; font-size: 20px;"></a>
@@ -21,12 +21,12 @@
 
 		</ion-content>
 			<div>
-				<i ng-click="addManipulation()" class="ion-android-add-circle" style="font-size: 400%; color:#FF0000; position: absolute; bottom: 10%; right: 10%;"></i>
+				<i ng-click="addManipulation()" class="ion-android-add-circle" style="font-size: 400%; color:#FF0000; position: absolute; bottom: 5%; right: 10%;"></i>
 			</div>
 		</ion-view>
 
 
-
+<!-- <div ng-click="addTohome(subject[$index])" style="background-color:#87CEEB" class="item item-divider"> -->
 
 <!--<label class="item item-input ic-selected">
 			<span class="input-label">ปีการศึกษา</span>

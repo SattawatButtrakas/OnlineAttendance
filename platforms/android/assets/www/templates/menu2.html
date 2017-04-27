@@ -1,25 +1,26 @@
-<ion-view style="" class=" " id="page7" title="หน้าหลัก">
-  <ion-content class="has-header" padding="false" style="background: url(img/bg1.jpg) center; background-size: cover;">
+<ion-view style="" class=" " id="page7" title="รายวิชา">
+  <ion-content class="has-header" padding="false" ng-init="loadMenu()"  style="background: url(img/bg1.jpg) center; background-size: cover;">
 
-    <div class="list list-inset card">
-
-    </div>
-    <!--subject Header-->
-    <div ng-repeat="item in subject">
-      <div ng-click="At()" class="list card">
-        <div style="min-height: 10px;" class="item item-divider">
-          <a class="icon icon-right ion-ios-book"></a>
-          {{item.Subject_name}}
+    <!--Add Subject-->
+    <div ng-repeat="item in menu">
+      <div class="list card">
+        <div ng-click="addTohome(menu[$index])" style="background-color:#87CEEB" class="item item-divider">
+          <a class="icon icon-right ion-ios-book" style="color:black; margin-right: 10px"></a>{{item.name}}
+          <div style="float: right;">
+            <a ng-click="addManipulation(item)" class="icon icon-right ion-edit" style="color:black; font-size: 20px;"></a>
+            <a ng-click="deletesubject(item.$id)" class="icon icon-right ion-android-delete" style="color:black; font-size: 20px;"></a>
+          </div>
         </div>
         <div class="item item-body">
-
           <span style="font-size:15px">{{item.subject}}</span>
-          <span style="font-size:15px">รหัสวิชา: {{item.Subject_id}}</span>
-          <span style="margin-left: 30%; font-size:15px">กลุ่ม: {{item.group}}</span>
-
+          <span style="font-size:15px">รหัสวิชา : {{item.id}}</span>
+          <span style="margin-left: 30%">กลุ่ม : {{item.group}}</span>
         </div>
       </div>
     </div>
 
   </ion-content>
+  <div>
+    <i ng-click="addManipulation()" class="ion-android-add-circle" style="font-size: 400%; color:#FF0000; position: absolute; bottom: 5%; right: 10%;"></i>
+  </div>
 </ion-view>

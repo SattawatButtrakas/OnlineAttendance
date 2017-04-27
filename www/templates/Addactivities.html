@@ -1,12 +1,12 @@
 <ion-view title="กิจกรรม">
-  <ion-content class="has-header" ng-init="loadMenu()" style="background: url(img/bg1.jpg) center; background-size: cover;">
+  <ion-content class="has-header" ng-init="loadActivities()" style="background: url(img/bg1.jpg) center; background-size: cover;">
 
     <!--Activities Header-->
     <div ng-repeat="item in Activities">
       <div class="list card">
-        <div style="min-height: 5px; background-color:#87CEEB;" class="item item-divider">
+        <div ng-click="addTohome(Activities[$index])" style="min-height: 5px; background-color:#87CEEB;" class="item item-divider">
           <a class="icon icon-right ion-ios-people" style="color:black;"></a>
-          {{item.Activities_name}}
+          {{item.name}}
           <div style="float: right;">
             <a ng-click="addManipulation(item)" class="icon icon-right ion-edit" style="color:black; font-size: 20px;"></a>
             <a ng-click="deleteActivities(item.$id)" class="icon icon-right ion-android-delete" style="color:black; font-size: 20px;"></a>
@@ -20,5 +20,5 @@
     </div>
 
   </ion-content>
-  <i ng-click="addManipulation()" class="ion-android-add-circle" style="font-size: 400%; color:#FF0000; position: absolute; bottom: 10%; right: 10%;"></i>
+  <i ng-click="addManipulation()" class="ion-android-add-circle" style="font-size: 400%; color:#FF0000; position: absolute; bottom: 5%; right: 10%;"></i>
   </ion-view>
