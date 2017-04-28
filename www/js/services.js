@@ -9,13 +9,16 @@ angular.module('app.services', [])
     refTime = new Firebase("https://auth-3685b.firebaseio.com/Time"),
 		refActivities = new Firebase("https://auth-3685b.firebaseio.com/Activities"),
 		refMenu = new Firebase("https://auth-3685b.firebaseio.com/menu")
-
+		
 		return {
 		    ref: function() {
 		      return ref;
 		    },
 		    refhome: function() {
 		      return refhome;
+		    },
+				refAttendance: function() {
+		      return refAttendance;
 		    },
 		    refUser: function() {
 		      return refUser;
